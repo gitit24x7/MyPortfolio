@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  /* Define custom animations if needed, or use default */
+  --animate-spin-slow: spin 3s linear infinite;
+}
+
+/* Reset key defaults */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  /* Removed flex/center to allow full page layout */
+  background-color: var(--color-slate-50);
+  color: var(--color-slate-900);
+}
+
+/* Dark mode handling via data-mode or system pref if using v4 mechanisms, 
+   but we used 'darkMode: class' in config. 
+   In v4, use @variant dark (&:where(.dark, .dark *)); 
+*/
+
+/* Custom scrollbar for technical feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-slate-300);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-slate-700);
+}
