@@ -10,10 +10,12 @@ import Projects from './components/sections/Projects'
 import CursorFollower from './components/ui/CursorFollower'
 
 import TechStack from './components/sections/TechStack'
+import FigmaDesigns from './components/sections/FigmaDesigns'
 import Experience from './components/sections/Experience'
 import About from './components/sections/About'
 // import CodeShowcase from './components/sections/CodeShowcase' - Removed as per request
 import Footer from './components/layout/Footer'
+import VisitorCounter from './components/ui/VisitorCounter'
 
 import SectionSeparator from './components/ui/SectionSeparator'
 
@@ -29,8 +31,11 @@ function App() {
       <SectionSeparator />
       <TechStack />
       <SectionSeparator />
+      <FigmaDesigns />
+      <SectionSeparator />
       <About />
       <SectionSeparator />
+      <VisitorCounter />
       <Footer />
       <CursorFollower />
     </GridBackground>

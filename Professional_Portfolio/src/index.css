@@ -3,6 +3,17 @@
 @theme {
   /* Define custom animations if needed, or use default */
   --animate-spin-slow: spin 3s linear infinite;
+
+  /* Custom Keyframes */
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+
+    100% {
+      background-position: -200% 0;
+    }
+  }
 }
 
 /* Enable class-based dark mode manually for v4 */
@@ -32,10 +43,7 @@ body {
   color: var(--color-slate-900);
 }
 
-/* Dark mode handling via data-mode or system pref if using v4 mechanisms, 
-   but we used 'darkMode: class' in config. 
-   In v4, use @variant dark (&:where(.dark, .dark *)); 
-*/
+/* Dark mode handling using @variant above */
 
 /* Custom scrollbar for technical feel */
 ::-webkit-scrollbar {
