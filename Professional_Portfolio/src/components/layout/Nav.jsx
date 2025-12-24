@@ -82,8 +82,8 @@ const Nav = () => {
                             className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors group"
                         >
                             <Search className="w-4 h-4 group-hover:text-slate-900 dark:group-hover:text-slate-50" />
-                            <span className="text-xs font-mono hidden sm:inline">Search...</span>
-                            <div className="hidden sm:flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-slate-200 dark:bg-white/10 text-[10px] font-mono">
+                            <span className="text-xs font-sans hidden sm:inline">Search...</span>
+                            <div className="hidden sm:flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-slate-200 dark:bg-white/10 text-[10px] font-sans">
                                 <Command className="w-3 h-3" />
                                 <span>K</span>
                             </div>

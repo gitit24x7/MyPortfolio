@@ -42,7 +42,7 @@ const Experience = () => {
         <section className="relative z-10 transition-colors duration-500">
 
             {/* Row 1: Header */}
-            <div className="w-full border-b border-slate-300 dark:border-white/10 relative overflow-hidden">
+            <div className="w-full border-b border-slate-300 dark:border-white/10 relative overflow-hidden bg-slate-50 dark:bg-black">
                 <div className="max-w-5xl mx-auto border-x border-slate-300 dark:border-white/10 relative z-10 h-12 flex items-center justify-center">
                     <div className="flex items-center gap-6 overflow-x-auto no-scrollbar px-6">
                         <div className="px-6 py-1.5 rounded-full border border-slate-200 dark:border-white/10 text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 whitespace-nowrap bg-white/80 dark:bg-black/80 backdrop-blur-sm">
