@@ -169,19 +169,6 @@ You will see `p-6`, `mt-20`, `gap-8`.
 
 ---
 
-## Chapter 7: Safety Manual
-
-### ✅ What you can safely modify
-1.  **Text Content**: Go into `Hero.jsx` and change "Aditya Ojha" to your name. Change the "SYS: v3.0.0" text.
-2.  **Colors**: If you prefer blue over emerald, change `bg-emerald-500` to `bg-blue-500`.
-3.  **Images**: Use the `generate_image` tool or replace the `IMG_SLOT` placeholder with an actual `<img>` tag.
-
-### ⛔ What you should NOT touch yet
-1.  **`grid-cols-4` structure**: This balance (3/4 text, 1/4 image) is fragile. Changing it might break the alignment on tablets.
-2.  **`absolute inset-0` styling**: These handle the complex layering of textures. Touching them might make the text unreadable or the background disappear.
-3.  **The file paths**: Moving files around (e.g., moving `Hero.jsx` out of `sections`) will break the imports in `App.jsx`.
-
----
 
 ## Summary
 You now possess a portfolio engine that is:
