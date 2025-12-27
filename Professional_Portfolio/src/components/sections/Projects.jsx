@@ -4,7 +4,7 @@
  * Uses spanning columns and rows to create an interesting "masonry" feel.
  */
 
-import { ArrowUpRight, Github } from 'lucide-react'
+import { ArrowUpRight, Github, ExternalLink } from 'lucide-react'
 
 const projects = [
     {
@@ -42,8 +42,8 @@ const Projects = () => {
         <section id="work" className="relative z-10 transition-colors duration-500">
 
             {/* Row 1: Header */}
-            <div className="w-full border-b border-slate-300 dark:border-white/10 relative overflow-hidden">
-                <div className="max-w-5xl mx-auto border-x border-slate-300 dark:border-white/10 relative z-10 h-12 flex items-center justify-center">
+            <div className="w-full border-b border-grid relative overflow-hidden">
+                <div className="max-w-5xl mx-auto border-x border-grid relative z-10 h-12 flex items-center justify-center">
                     {/* Center Labels */}
                     <div className="flex items-center gap-6 overflow-x-auto no-scrollbar px-6">
                         <div className="px-6 py-1.5 rounded-full border border-slate-200 dark:border-white/10 text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 whitespace-nowrap bg-white/80 dark:bg-black/80 backdrop-blur-sm">
@@ -57,9 +57,9 @@ const Projects = () => {
             </div>
 
             {/* Row 2: Title & Intro */}
-            <div className="w-full border-b border-slate-300 dark:border-white/10">
-                <div className="max-w-5xl mx-auto border-x border-slate-300 dark:border-white/10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end px-6 py-8">
+            <div className="w-full border-b border-grid">
+                <div className="max-w-5xl mx-auto border-x border-grid">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end px-6 md:px-12 py-8">
                         <div>
                             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-0 tracking-tight transition-colors">
                                 Selected Work.
@@ -78,9 +78,9 @@ const Projects = () => {
 
 
             {/* Row 4: Bento Grid */}
-            <div className="w-full border-b border-slate-300 dark:border-white/10 bg-slate-50/30 dark:bg-white/5">
-                <div className="max-w-5xl mx-auto border-x border-slate-300 dark:border-white/10">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-12">
+            <div className="w-full border-b border-grid bg-slate-50/30 dark:bg-white/5">
+                <div className="max-w-5xl mx-auto border-x border-grid">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 md:p-12">
                         {projects.map((project, index) => (
                             <div
                                 key={index}
@@ -107,12 +107,25 @@ const Projects = () => {
                                         </p>
                                     </div>
 
-                                    <div className="flex flex-wrap gap-2">
-                                        {project.tech.map((t, i) => (
-                                            <span key={i} className="text-xs font-mono text-slate-500 dark:text-slate-500 bg-slate-100 dark:bg-slate-950 px-3 py-1 rounded-full border border-slate-200 dark:border-white/5 transition-colors">
-                                                {t}
-                                            </span>
-                                        ))}
+                                    <div className="flex flex-col gap-6">
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.tech.map((t, i) => (
+                                                <span key={i} className="text-xs font-mono text-slate-500 dark:text-slate-500 bg-slate-100 dark:bg-slate-950 px-3 py-1 rounded-full border border-slate-200 dark:border-white/5 transition-colors">
+                                                    {t}
+                                                </span>
+                                            ))}
+                                        </div>
+
+                                        <div className="flex items-center gap-4 pt-4 border-t border-slate-100 dark:border-white/5">
+                                            <a href={project.liveUrl || "#"} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                                <ExternalLink className="w-4 h-4" />
+                                                <span>Live Demo</span>
+                                            </a>
+                                            <a href={project.codeUrl || "#"} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                                                <Github className="w-4 h-4" />
+                                                <span>Code</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
