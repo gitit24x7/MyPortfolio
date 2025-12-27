@@ -3,26 +3,25 @@ import { Code2, Calendar } from 'lucide-react';
 
 const experience = [
     {
-        company: "Tech Corp Inc.",
-        role: "Senior Frontend Engineer",
-        period: "2023 - Present",
+        company: "Societe Generale.",
+        role: "Specialist Software Engineer",
+        period: "2025 April - Present",
         description: [
             "Leading the design system migration and improving core web vitals by 40%.",
             "Architected a micro-frontend solution for the main dashboard.",
             "Mentored 3 junior developers."
         ],
-        technologies: ["React", "Next.js", "GraphQL"]
+
     },
     {
-        company: "StartupXYZ",
-        role: "Full Stack Developer",
-        period: "2021 - 2023",
+        company: "Coinbase",
+        role: "Cloud Developer Support",
+        period: "Apr 2022 - Dec 2024",
         description: [
             "Built the MVP from scratch and scaled to 10k users.",
             "Handled auth, payments (Stripe), and realtime features (Socket.io).",
             "Optimized database queries decreasing load times by 200ms."
         ],
-        technologies: ["Node.js", "Postgres", "Redis"]
     },
     {
         company: "Digital Agency",
@@ -42,8 +41,8 @@ const Experience = () => {
         <section className="relative z-10 transition-colors duration-500">
 
             {/* Row 1: Header */}
-            <div className="w-full border-b border-slate-300 dark:border-white/10 relative overflow-hidden bg-slate-50 dark:bg-black">
-                <div className="max-w-5xl mx-auto border-x border-slate-300 dark:border-white/10 relative z-10 h-12 flex items-center justify-center">
+            <div className="w-full border-b border-grid relative overflow-hidden bg-slate-50 dark:bg-black">
+                <div className="max-w-5xl mx-auto border-x border-grid relative z-10 h-12 flex items-center justify-center">
                     <div className="flex items-center gap-6 overflow-x-auto no-scrollbar px-6">
                         <div className="px-6 py-1.5 rounded-full border border-slate-200 dark:border-white/10 text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 whitespace-nowrap bg-white/80 dark:bg-black/80 backdrop-blur-sm">
                             History: Verified
@@ -56,8 +55,8 @@ const Experience = () => {
             </div>
 
             {/* Row 2: Title */}
-            <div className="w-full border-b border-slate-300 dark:border-white/10">
-                <div className="max-w-5xl mx-auto border-x border-slate-300 dark:border-white/10">
+            <div className="w-full border-b border-grid">
+                <div className="max-w-5xl mx-auto border-x border-grid">
                     <div className="px-6 py-8 text-center md:text-left">
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-0 tracking-tight transition-colors">
                             Experience.
@@ -67,11 +66,11 @@ const Experience = () => {
             </div>
 
             {/* Row 3: Experience Grid */}
-            <div className="w-full border-b border-slate-300 dark:border-white/10 bg-slate-50/30 dark:bg-black/20">
-                <div className="max-w-5xl mx-auto border-x border-slate-300 dark:border-white/10">
+            <div className="w-full border-b border-grid bg-slate-50/30 dark:bg-black/20">
+                <div className="max-w-5xl mx-auto border-x border-grid">
                     <div className="w-full">
                         {experience.map((job, index) => (
-                            <div key={index} className="border-b border-slate-300 dark:border-white/10 last:border-b-0">
+                            <div key={index} className="border-b border-grid last:border-b-0">
 
                                 {/* Header: Company */}
                                 <div className="px-6 py-6 flex items-center gap-3 bg-white dark:bg-black transition-colors">
@@ -80,7 +79,7 @@ const Experience = () => {
                                 </div>
 
                                 {/* Sub-Header: Role & Date */}
-                                <div className="px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border-t border-b border-slate-300 dark:border-white/10 bg-slate-50 dark:bg-white/5">
+                                <div className="px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border-t border-b border-grid bg-slate-50 dark:bg-white/5">
                                     <div className="flex items-center gap-2 text-slate-700 dark:text-slate-200 font-medium">
                                         <div className="p-1.5 rounded-md bg-white dark:bg-black border border-slate-200 dark:border-white/10">
                                             <Code2 className="w-4 h-4" />
@@ -109,16 +108,7 @@ const Experience = () => {
                                     </ul>
                                 </div>
 
-                                {/* Footer: Tags */}
-                                <div className="px-6 py-4 border-t border-slate-300 dark:border-white/10 bg-slate-50/50 dark:bg-black">
-                                    <div className="flex flex-wrap gap-2">
-                                        {job.technologies.map((tech, i) => (
-                                            <span key={i} className="text-xs font-mono text-slate-500 dark:text-slate-400 bg-white dark:bg-white/5 px-2 py-1 rounded border border-slate-200 dark:border-white/10">
-                                                {tech}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
+
 
                             </div>
                         ))}

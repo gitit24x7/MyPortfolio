@@ -43,7 +43,7 @@ const Nav = () => {
 
     return (
         <>
-            <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-300 dark:border-white/5 backdrop-blur-md bg-white/50 dark:bg-slate-950/50 transition-colors duration-500">
+            <nav className="fixed top-0 left-0 right-0 z-50 border-b border-grid backdrop-blur-md bg-white/50 dark:bg-slate-950/50 transition-colors duration-500">
                 <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
                     {/* Logo/Name */}
                     <div className="flex items-center gap-3">

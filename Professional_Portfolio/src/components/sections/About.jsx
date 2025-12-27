@@ -6,8 +6,8 @@ const About = () => {
         <section id="about" className="relative z-10 transition-colors duration-500">
 
             {/* Row 1: Technical Header */}
-            <div className="w-full border-b border-slate-300 dark:border-white/10 relative overflow-hidden">
-                <div className="max-w-5xl mx-auto border-x border-slate-300 dark:border-white/10 relative z-10 h-16 flex items-center justify-center">
+            <div className="w-full border-b border-grid relative overflow-hidden">
+                <div className="max-w-5xl mx-auto border-x border-grid relative z-10 h-16 flex items-center justify-center">
                     <div className="flex items-center gap-3 sm:gap-6 overflow-x-auto no-scrollbar px-3 sm:px-6">
                         <div className="px-3 py-1 sm:px-6 sm:py-1.5 rounded-full border border-slate-200 dark:border-white/10 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 whitespace-nowrap bg-white/80 dark:bg-black/80 backdrop-blur-sm">
                             System Status: Online
@@ -20,8 +20,8 @@ const About = () => {
             </div>
 
             {/* Row 2: Main Content */}
-            <div className="w-full border-b border-slate-300 dark:border-white/10">
-                <div className="max-w-5xl mx-auto border-x border-slate-300 dark:border-white/10">
+            <div className="w-full border-b border-grid">
+                <div className="max-w-5xl mx-auto border-x border-grid">
                     <div className="grid grid-cols-2 gap-4 sm:gap-8 items-start px-3 sm:px-6 py-4 sm:py-8">
 
                         {/* Left Column: Image/Stats Container */}
@@ -48,17 +48,17 @@ const About = () => {
                         </div>
 
                         {/* Right Column: Narrative (Margin Grid Style) */}
-                        <div className="flex flex-col border-l border-slate-300 dark:border-white/10 -my-4 -mr-3 -mb-4 sm:-my-8 sm:-mr-6 sm:-mb-8">
-                            <div className="border border-slate-300 dark:border-white/10 rounded-xl overflow-hidden bg-slate-50/30 dark:bg-white/5">
+                        <div className="flex flex-col border-l border-grid -my-4 -mr-3 -mb-4 sm:-my-8 sm:-mr-6 sm:-mb-8">
+                            <div className="border border-grid rounded-xl overflow-hidden bg-slate-50/30 dark:bg-white/5">
                                 {/* Row 1: Headline */}
-                                <div className="p-3 sm:p-6 border-b border-slate-300 dark:border-white/10 bg-white dark:bg-black">
+                                <div className="p-3 sm:p-6 border-b border-grid bg-white dark:bg-black">
                                     <h2 className="text-lg sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 tracking-tight">
                                         More Than Code.
                                     </h2>
                                 </div>
 
                                 {/* Row 2: Text 1 */}
-                                <div className="p-3 sm:p-6 border-b border-slate-300 dark:border-white/10">
+                                <div className="p-3 sm:p-6 border-b border-grid">
                                     <p className="text-xs sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
                                         I'm a developer who obsessively focuses on the intersection of design and engineering.
                                         I believe that the best digital products are born when technical excellence meets
@@ -67,7 +67,7 @@ const About = () => {
                                 </div>
 
                                 {/* Row 3: Text 2 */}
-                                <div className="p-3 sm:p-6 border-b border-slate-300 dark:border-white/10 bg-slate-50/50 dark:bg-white/5">
+                                <div className="p-3 sm:p-6 border-b border-grid bg-slate-50/50 dark:bg-white/5">
                                     <p className="text-xs sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
                                         When I'm not debugging, I'm likely exploring new design systems, minimizing latency,
                                         or brewing the perfect cup of coffee.
@@ -84,7 +84,7 @@ const About = () => {
                                         <Coffee className="w-3 h-3 sm:w-5 sm:h-5 text-slate-400" />
                                         <span className="text-[10px] sm:text-sm font-medium text-slate-900 dark:text-slate-50">Fuel Check</span>
                                     </div>
-                                    <div className="bg-white dark:bg-black p-6 flex flex-col items-center justify-center gap-2 col-span-2 border-t border-slate-200 dark:border-white/10">
+                                    <div className="bg-white dark:bg-black p-6 flex flex-col items-center justify-center gap-2 col-span-2 border-t border-grid">
                                         <Code2 className="w-5 h-5 text-slate-400" />
                                         <span className="text-sm font-medium text-slate-900 dark:text-slate-50">Full Stack</span>
                                     </div>

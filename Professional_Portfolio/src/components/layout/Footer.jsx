@@ -15,11 +15,11 @@ const socialLinks = [
 const Footer = () => {
     return (
         <footer className="bg-slate-50 dark:bg-black relative z-10 transition-colors duration-500">
-            <div className="max-w-5xl mx-auto border-x border-slate-300 dark:border-white/10">
+            <div className="max-w-5xl mx-auto border-x border-grid">
 
                 {/* Footer Content Container */}
                 <div className="bg-white dark:bg-black">
-                    <div className="grid grid-cols-4 divide-x divide-slate-300 dark:divide-white/10 border-b border-slate-300 dark:border-white/10">
+                    <div className="grid grid-cols-4 divide-x divide-slate-300 dark:divide-white/10 border-b border-grid">
                         {socialLinks.map((social, index) => (
                             <a
                                 key={index}

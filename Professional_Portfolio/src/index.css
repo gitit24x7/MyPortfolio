@@ -32,6 +32,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* CENTRAL GRID BORDER CONTROL */
+  /* Change these values to update grid lines across the entire app */
+  --grid-border-light: var(--color-slate-300);
+  --grid-border-dark: rgba(255, 255, 255, 0.20);
+  /* Currently 20% opacity */
 }
 
 body {
@@ -41,6 +47,15 @@ body {
   /* Removed flex/center to allow full page layout */
   background-color: var(--color-slate-50);
   color: var(--color-slate-900);
+}
+
+/* UTILITY CLASS FOR GRID BORDERS */
+.border-grid {
+  border-color: var(--grid-border-light);
+}
+
+.dark .border-grid {
+  border-color: var(--grid-border-dark);
 }
 
 /* Dark mode handling using @variant above */
