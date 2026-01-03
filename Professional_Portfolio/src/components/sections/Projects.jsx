@@ -8,11 +8,13 @@ import { ArrowUpRight, Github, ExternalLink } from 'lucide-react'
 
 const projects = [
     {
-        title: "E-Commerce Dashboard",
-        description: "A high-performance analytics dashboard for online retailers. Features real-time data visualization, inventory management, and profit tracking.",
-        tech: ["Next.js", "TypeScript", "Tremor", "Supabase"],
+        title: "React Mastery",
+        description: "A quick practice platforom for react to build muscle memory, with little to less knowledge of ReactJS",
+        tech: ["ReactJS", "Tailwind CSS", "Supabase", "Framer Motion", "PostgreSQL"],
         size: "large", // spans 2 cols
-        color: "bg-blue-500/10"
+        color: "bg-blue-500/10",
+        liveUrl: "https://reactmastery.xyz",
+        githubUrl: "https://github.com/"
     },
     {
         title: "AI Chat Interface",
