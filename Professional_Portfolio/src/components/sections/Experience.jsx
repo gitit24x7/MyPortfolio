@@ -7,9 +7,12 @@ const experience = [
         role: "Specialist Software Engineer",
         period: "2025 April - Present",
         description: [
-            "Leading the design system migration and improving core web vitals by 40%.",
-            "Architected a micro-frontend solution for the main dashboard.",
-            "Mentored 3 junior developers."
+            "Handled Production.",
+            "Automated tasks with Airflow.",
+            "Wrote and optimized SQL Queries.",
+            "Wrote Shell scripts to automate daily tasks.",
+            "Solved 10-12 user request tickets everyday",
+            "Improved the UI of the internal tools developed in ReactJS."
         ],
 
     },
@@ -18,21 +21,27 @@ const experience = [
         role: "Cloud Developer Support",
         period: "Apr 2022 - Dec 2024",
         description: [
-            "Built the MVP from scratch and scaled to 10k users.",
-            "Handled auth, payments (Stripe), and realtime features (Socket.io).",
-            "Optimized database queries decreasing load times by 200ms."
+
+            "Analyzed 500+ user interface issues to provide actionable feedback to development team, resulting in 30% reduction in UI-related support tickets. ",
+            "Specialized in improving form validation, navigation flows, and responsive design implementations.",
+            "Collaborated with frontend team to identify, document, and validate bug fixes for critical UI components. ",
+            "Implemented minor CSS fixes and HTML updates using Git workflow, contributing to 25% faster issue resolution.",
+            "Worked on the customer facing side of a new blockchain L2 project, resolving 30-40 queries everyday.",
+            "Interacted on social media platforms to resolve 40-50 user queries everyday."
+
+
         ],
     },
     {
-        company: "Digital Agency",
-        role: "Frontend Developer",
-        period: "2019 - 2021",
+        company: "Teleperformance",
+        role: "Support Engineer",
+        period: "2019-2021",
         description: [
-            "Developed award-winning marketing sites for Fortune 500 clients.",
-            "Implemented complex WebGL animations using Three.js.",
-            "Collaborated closely with designers to ensure pixel-perfect implementation."
+            "Leveraged comprehensive frontend development toolkit including Chrome DevTools for advanced JavaScript debugging and network request analysis, Git for version control and documentation management, JIRA for systematic tracking of UI/UX issues, and Postman for seamless API integration testing. ",
+            "This technical proficiency enabled efficient troubleshooting workflows and reduced average bug resolution time from 48 to 24 hours.",
+            "Streamlined customer portal layouts by implementing modern flexbox and CSS grid systems, achieving 30% faster navigation."
         ],
-        technologies: ["Vue.js", "GSAP", "WebGL"]
+        technologies: ["JavaScript", "CSS", "git"]
     }
 ]
 

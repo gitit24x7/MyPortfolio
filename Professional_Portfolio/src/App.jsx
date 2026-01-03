@@ -18,10 +18,12 @@ import Footer from './components/layout/Footer'
 import VisitorCounter from './components/ui/VisitorCounter'
 
 import SectionSeparator from './components/ui/SectionSeparator'
+import SmoothScroll from './components/utils/SmoothScroll'
 
 function App() {
   return (
     <GridBackground>
+      <SmoothScroll />
       <Nav />
       <Hero />
       <SectionSeparator />
