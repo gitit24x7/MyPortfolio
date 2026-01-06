@@ -1,27 +1,51 @@
 /**
  * Nav Component (Updated)
  * Features:
- * - Theme Toggle (Day/Night) with smooth animation
+ * - Theme Toggle (Day/Night) with beautiful DROP animation transition
+ * - Liquid drop effect that expands from toggle button
+ * - Smooth ripple and icon animations
  * - Search Trigger
  * - Blog Link
  */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Sun, Moon, Search, Command } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import SearchCommand from '../ui/SearchCommand'
 
 const Nav = () => {
     const [isDark, setIsDark] = useState(true)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const [isAnimating, setIsAnimating] = useState(false)
+    const [dropOrigin, setDropOrigin] = useState({ x: 0, y: 0 })
+    const toggleRef = useRef(null)
 
-    // Handle Theme Toggle
+    // Handle Theme Toggle with drop animation
     const toggleTheme = () => {
+        if (isAnimating) return
+
+        // Get toggle button position for drop origin
+        if (toggleRef.current) {
+            const rect = toggleRef.current.getBoundingClientRect()
+            setDropOrigin({
+                x: rect.left + rect.width / 2,
+                y: rect.top + rect.height / 2
+            })
+        }
+
+        setIsAnimating(true)
+
+        // INSTANT theme change - no delay!
         setIsDark(!isDark)
         if (isDark) {
             document.documentElement.classList.remove('dark')
         } else {
             document.documentElement.classList.add('dark')
         }
+
+        // Quick animation reset
+        setTimeout(() => {
+            setIsAnimating(false)
+        }, 500)
     }
 
     // Initialize Theme
@@ -41,8 +65,98 @@ const Nav = () => {
         return () => window.removeEventListener('keydown', handleKeyDown)
     }, [])
 
+    // Drop animation variants
+    const dropVariants = {
+        initial: {
+            clipPath: 'circle(0% at var(--origin-x) var(--origin-y))',
+            opacity: 1
+        },
+        animate: {
+            clipPath: 'circle(150% at var(--origin-x) var(--origin-y))',
+            opacity: 1,
+            transition: {
+                duration: 0.4,
+                ease: [0.22, 1, 0.36, 1] // Custom easeOutQuint for smooth, non-jittery feel
+            }
+        },
+        exit: {
+            opacity: 0,
+            transition: {
+                duration: 0.15
+            }
+        }
+    }
+
+    // Ripple effect variants
+    const rippleVariants = {
+        initial: { scale: 0, opacity: 0.6 },
+        animate: {
+            scale: 4,
+            opacity: 0,
+            transition: {
+                duration: 0.6,
+                ease: 'easeOut'
+            }
+        }
+    }
+
+    // Icon animation variants
+    const iconVariants = {
+        initial: {
+            scale: 0,
+            rotate: -180,
+            opacity: 0
+        },
+        animate: {
+            scale: 1,
+            rotate: 0,
+            opacity: 1,
+            transition: {
+                type: 'spring',
+                stiffness: 200,
+                damping: 15,
+                delay: 0.1
+            }
+        },
+        exit: {
+            scale: 0,
+            rotate: 180,
+            opacity: 0,
+            transition: {
+                duration: 0.2
+            }
+        },
+        hover: {
+            scale: 1.1,
+            rotate: 15,
+            transition: {
+                type: 'spring',
+                stiffness: 400,
+                damping: 10
+            }
+        }
+    }
+
     return (
         <>
+            {/* Full-screen drop overlay */}
+            <AnimatePresence>
+                {isAnimating && (
+                    <motion.div
+                        className="fixed inset-0 z-[100] pointer-events-none"
+                        style={{
+                            '--origin-x': `${dropOrigin.x}px`,
+                            '--origin-y': `${dropOrigin.y}px`,
+                            backgroundColor: isDark ? '#fef3c7' : '#0f172a' // Switching TO this color
+                        }}
+                        variants={dropVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                    />
+                )}
+            </AnimatePresence>
+
             <nav className="fixed top-0 left-0 right-0 z-50 border-b border-grid backdrop-blur-md bg-white/50 dark:bg-slate-950/50 transition-colors duration-500">
                 <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
                     {/* Logo/Name */}
@@ -89,32 +203,91 @@ const Nav = () => {
                             </div>
                         </button>
 
-                        {/* Theme Toggle */}
+                        {/* Enhanced Theme Toggle with Drop Animation */}
                         <motion.button
+                            ref={toggleRef}
                             onClick={toggleTheme}
-                            className="relative w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center overflow-hidden hover:bg-slate-200 dark:hover:bg-white/10 transition-colors"
-                            whileTap={{ scale: 0.9 }}
+                            disabled={isAnimating}
+                            className="relative w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center overflow-hidden hover:bg-slate-200 dark:hover:bg-white/10 transition-colors cursor-pointer disabled:cursor-wait"
+                            whileTap={{ scale: 0.85 }}
+                            whileHover="hover"
                         >
+                            {/* Ripple effect on click */}
+                            <AnimatePresence>
+                                {isAnimating && (
+                                    <>
+                                        <motion.span
+                                            className="absolute inset-0 rounded-full"
+                                            style={{
+                                                backgroundColor: isDark ? 'rgba(251, 191, 36, 0.3)' : 'rgba(139, 92, 246, 0.3)'
+                                            }}
+                                            variants={rippleVariants}
+                                            initial="initial"
+                                            animate="animate"
+                                        />
+                                        <motion.span
+                                            className="absolute inset-0 rounded-full"
+                                            style={{
+                                                backgroundColor: isDark ? 'rgba(251, 191, 36, 0.2)' : 'rgba(139, 92, 246, 0.2)'
+                                            }}
+                                            variants={rippleVariants}
+                                            initial="initial"
+                                            animate="animate"
+                                            transition={{ delay: 0.1 }}
+                                        />
+                                    </>
+                                )}
+                            </AnimatePresence>
+
+                            {/* Sun Icon */}
+                            <AnimatePresence mode="wait">
+                                {!isDark && (
+                                    <motion.div
+                                        key="sun"
+                                        className="absolute"
+                                        variants={iconVariants}
+                                        initial="initial"
+                                        animate="animate"
+                                        exit="exit"
+                                        whileHover="hover"
+                                    >
+                                        <Sun className="w-5 h-5 text-amber-500 drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]" />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            {/* Moon Icon */}
+                            <AnimatePresence mode="wait">
+                                {isDark && (
+                                    <motion.div
+                                        key="moon"
+                                        className="absolute"
+                                        variants={iconVariants}
+                                        initial="initial"
+                                        animate="animate"
+                                        exit="exit"
+                                        whileHover="hover"
+                                    >
+                                        <Moon className="w-5 h-5 text-purple-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]" />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            {/* Glow ring effect */}
                             <motion.div
-                                initial={false}
-                                animate={{
-                                    y: isDark ? 20 : 0,
-                                    opacity: isDark ? 0 : 1
+                                className="absolute inset-0 rounded-full border-2"
+                                style={{
+                                    borderColor: isDark ? 'rgba(139, 92, 246, 0.3)' : 'rgba(251, 191, 36, 0.3)'
                                 }}
-                                className="absolute"
-                            >
-                                <Sun className="w-5 h-5 text-amber-500" />
-                            </motion.div>
-                            <motion.div
-                                initial={false}
                                 animate={{
-                                    y: isDark ? 0 : -20,
-                                    opacity: isDark ? 1 : 0
+                                    scale: isAnimating ? [1, 1.5, 1] : 1,
+                                    opacity: isAnimating ? [1, 0, 1] : 0.5
                                 }}
-                                className="absolute"
-                            >
-                                <Moon className="w-5 h-5 text-purple-400" />
-                            </motion.div>
+                                transition={{
+                                    duration: 0.6,
+                                    ease: 'easeOut'
+                                }}
+                            />
                         </motion.button>
                     </div>
                 </div>
