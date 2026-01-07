@@ -30,7 +30,8 @@ const About = () => {
                             <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-slate-900 dark:border-white transition-colors" />
 
                             <div className="aspect-square rounded-sm overflow-hidden bg-slate-100 dark:bg-white/5 relative border border-slate-200 dark:border-white/10">
-                                <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 opacity-10 pointer-events-none">
+                                {/* Grid overlay */}
+                                <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 opacity-10 pointer-events-none z-10">
                                     <div className="border-r border-b border-current" />
                                     <div className="border-r border-b border-current" />
                                     <div className="border-b border-current" />
@@ -41,9 +42,12 @@ const About = () => {
                                     <div className="border-r border-current" />
                                     <div />
                                 </div>
-                                <div className="absolute inset-0 flex items-center justify-center text-slate-300 dark:text-slate-700">
-                                    <User className="w-12 h-12 sm:w-24 sm:h-24 opacity-50" />
-                                </div>
+                                {/* About Me Image */}
+                                <img
+                                    src="/About me.png"
+                                    alt="About Me"
+                                    className="absolute inset-0 w-full h-full object-cover object-center"
+                                />
                             </div>
                         </div>
 

@@ -17,9 +17,9 @@ const projects = [
         githubUrl: "https://github.com/"
     },
     {
-        title: "AI Chat Interface",
-        description: "Minimalist LLM chat interface with streaming responses and markdown support.",
-        tech: ["React", "OpenAI API", "Tailwind"],
+        title: "Headerly",
+        description: "Create Professional high conversion linkedin banners within 60s for free",
+        tech: ["React", "TypeScript", "TailwindCSS","Lenis","Framer Motion"],
         size: "small",
         color: "bg-purple-500/10"
     },

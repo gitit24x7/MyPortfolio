@@ -6,10 +6,10 @@
 import { Github, Twitter, Linkedin, Mail } from 'lucide-react'
 
 const socialLinks = [
-    { icon: Github, href: "https://github.com", label: "GitHub" },
-    { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-    { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:hello@example.com", label: "Email" }
+    { icon: Github, href: "https://github.com/gitit24x7", label: "GitHub" },
+    { icon: Twitter, href: "https://x.com/buggy247_?s=21", label: "Twitter" },
+    { icon: Linkedin, href: "https://linkedin.com/in/ojhaadityaa", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:thisisadityaojha@gmail.com", label: "Email" }
 ]
 
 const Footer = () => {

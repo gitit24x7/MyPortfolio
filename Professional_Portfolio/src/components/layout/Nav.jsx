@@ -195,7 +195,12 @@ const Nav = () => {
                             <a href="#work" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Work</a>
                             <a href="#about" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">About</a>
                             <a href="#blog" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Blog</a>
-                            <a href="#contact" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Contact</a>
+                            <a
+                                href="mailto:thisisadityaojha@gmail.com?subject=Let's%20Connect%20-%20From%20Your%20Portfolio&body=Hi%20Aditya,%0A%0AI%20found%20your%20portfolio%20and%20would%20love%20to%20connect!%0A%0A"
+                                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors"
+                            >
+                                Contact
+                            </a>
                         </div>
 
                         <div className="h-6 w-px bg-slate-200 dark:bg-white/10 mx-2" />
