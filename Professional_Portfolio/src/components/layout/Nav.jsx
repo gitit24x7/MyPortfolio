@@ -45,7 +45,7 @@ const Nav = () => {
         // Quick animation reset
         setTimeout(() => {
             setIsAnimating(false)
-        }, 500)
+        }, 450)
     }
 
     // Initialize Theme
@@ -65,26 +65,34 @@ const Nav = () => {
         return () => window.removeEventListener('keydown', handleKeyDown)
     }, [])
 
-    // Drop animation variants
+    // Drop animation - scale-based circle expansion
     const dropVariants = {
         initial: {
-            clipPath: 'circle(0% at var(--origin-x) var(--origin-y))',
-            opacity: 1
+            scale: 0,
+            opacity: 0.3
         },
         animate: {
-            clipPath: 'circle(150% at var(--origin-x) var(--origin-y))',
-            opacity: 1,
+            scale: 1,
+            opacity: 0.15,
             transition: {
-                duration: 0.4,
-                ease: [0.22, 1, 0.36, 1] // Custom easeOutQuint for smooth, non-jittery feel
+                duration: 0.35,
+                ease: [0.22, 1, 0.36, 1]
             }
         },
         exit: {
+            scale: 0,
             opacity: 0,
             transition: {
-                duration: 0.15
+                duration: 0.25,
+                ease: [0.55, 0, 1, 0.45]
             }
         }
+    }
+
+    // Calculate size needed to cover the screen
+    const getDropSize = () => {
+        if (typeof window === 'undefined') return 3000
+        return Math.max(window.innerWidth, window.innerHeight) * 3
     }
 
     // Ripple effect variants
@@ -139,15 +147,17 @@ const Nav = () => {
 
     return (
         <>
-            {/* Full-screen drop overlay */}
+            {/* Drop overlay - scales from toggle button */}
             <AnimatePresence>
                 {isAnimating && (
                     <motion.div
-                        className="fixed inset-0 z-[100] pointer-events-none"
+                        className="fixed z-[100] pointer-events-none rounded-full"
                         style={{
-                            '--origin-x': `${dropOrigin.x}px`,
-                            '--origin-y': `${dropOrigin.y}px`,
-                            backgroundColor: isDark ? '#fef3c7' : '#0f172a' // Switching TO this color
+                            width: getDropSize(),
+                            height: getDropSize(),
+                            left: dropOrigin.x - getDropSize() / 2,
+                            top: dropOrigin.y - getDropSize() / 2,
+                            backgroundColor: isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.1)'
                         }}
                         variants={dropVariants}
                         initial="initial"
@@ -185,7 +195,12 @@ const Nav = () => {
                             <a href="#work" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Work</a>
                             <a href="#about" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">About</a>
                             <a href="#blog" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Blog</a>
-                            <a href="#contact" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Contact</a>
+                            <a
+                                href="mailto:thisisadityaojha@gmail.com?subject=Let's%20Connect%20-%20From%20Your%20Portfolio&body=Hi%20Aditya,%0A%0AI%20found%20your%20portfolio%20and%20would%20love%20to%20connect!%0A%0A"
+                                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors"
+                            >
+                                Contact
+                            </a>
                         </div>
 
                         <div className="h-6 w-px bg-slate-200 dark:bg-white/10 mx-2" />

@@ -14,6 +14,42 @@
       background-position: -200% 0;
     }
   }
+
+  @keyframes twinkle-slow {
+
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes twinkle-medium {
+
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes twinkle-fast {
+
+    0%,
+    100% {
+      opacity: 0.1;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
 }
 
 /* Enable class-based dark mode manually for v4 */
