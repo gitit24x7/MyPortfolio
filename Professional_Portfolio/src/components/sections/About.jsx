@@ -22,10 +22,10 @@ const About = () => {
             {/* Row 2: Main Content */}
             <div className="w-full border-b border-grid">
                 <div className="max-w-5xl mx-auto border-x border-grid">
-                    <div className="grid grid-cols-2 gap-4 sm:gap-8 items-start px-3 sm:px-6 py-4 sm:py-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-start px-3 sm:px-6 py-4 sm:py-8">
 
                         {/* Left Column: Image/Stats Container */}
-                        <div className="relative group">
+                        <div className="relative group mx-auto md:mx-0 w-full max-w-[280px] md:max-w-none">
                             <div className="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-slate-900 dark:border-white transition-colors" />
                             <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-slate-900 dark:border-white transition-colors" />
 
@@ -52,7 +52,7 @@ const About = () => {
                         </div>
 
                         {/* Right Column: Narrative (Margin Grid Style) */}
-                        <div className="flex flex-col border-l border-grid -my-4 -mr-3 -mb-4 sm:-my-8 sm:-mr-6 sm:-mb-8">
+                        <div className="flex flex-col md:border-l border-grid md:-my-8 md:-mr-6 md:-mb-8">
                             <div className="border border-grid rounded-xl overflow-hidden bg-slate-50/30 dark:bg-white/5">
                                 {/* Row 1: Headline */}
                                 <div className="p-3 sm:p-6 border-b border-grid bg-white dark:bg-black">
