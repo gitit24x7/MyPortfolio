@@ -385,10 +385,10 @@ const Hero = () => {
                             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] brightness-100 contrast-100 mix-blend-overlay pointer-events-none"></div>
                             <div className="grid grid-cols-1 md:grid-cols-4 relative z-10">
                                 {/* Left Content */}
-                                <div className="col-span-1 md:col-span-3 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-center sm:justify-between relative">
+                                <div className="col-span-1 md:col-span-3 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-center sm:justify-between relative overflow-hidden">
                                     <div className="absolute inset-0 bg-white/0 group-hover/row:bg-white/[0.02] transition-colors duration-500" />
-                                    <p className="text-xs sm:text-base text-white font-light tracking-wide text-left relative z-10 w-full">
-                                        Full Stack Developer crafting systems with <span className="text-white font-medium">design intuition</span>.
+                                    <p className="text-xs sm:text-base text-white font-light tracking-wide text-left relative z-10 w-full break-words pr-2">
+                                        Full Stack Developer crafting systems with <span className="text-white font-medium whitespace-nowrap">design intuition</span>.
                                     </p>
                                     <a href="mailto:thisisadityaojha@gmail.com" className="text-[10px] sm:text-sm text-slate-200 hover:text-white transition-colors mt-1 sm:mt-2 relative z-10 flex items-center gap-1 sm:gap-2 whitespace-nowrap">
                                         <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
