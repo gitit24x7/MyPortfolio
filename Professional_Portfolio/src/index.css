@@ -76,6 +76,10 @@
   /* Currently 20% opacity */
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -83,6 +87,7 @@ body {
   /* Removed flex/center to allow full page layout */
   background-color: var(--color-slate-50);
   color: var(--color-slate-900);
+  overflow-x: hidden;
 }
 
 /* UTILITY CLASS FOR GRID BORDERS */
