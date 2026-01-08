@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="professional_portfolio/src/public/tech/Profile_pic.png" alt="Portfolio Preview" width="120" style="border-radius: 50%;" />
+  <img src="https://github.com/gitit24x7/MyPortfolio/blob/main/Professional_Portfolio/public/tech/Profile_pic.png)" alt="Portfolio Preview" width="120" style="border-radius: 50%;" />
 </p>
 
 <h1 align="center">Aditya Ojha — Developer Portfolio</h1>
