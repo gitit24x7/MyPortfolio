@@ -336,13 +336,13 @@ const Hero = () => {
 
                     {/* Row 1: Name & System Metadata (Full Width) */}
                     <div className="w-full border-y md:border-y border-grid relative group/row overflow-hidden border-t-0 md:border-t">
-                        <div className="max-w-5xl mx-auto border-x border-grid relative z-10 overflow-hidden">
+                        <div className="max-w-5xl mx-auto border-x border-grid relative z-10 overflow-hidden bg-black/80 md:bg-transparent">
                             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] brightness-100 contrast-100 mix-blend-overlay pointer-events-none"></div>
                             <div className="grid grid-cols-1 md:grid-cols-4 relative z-10">
                                 {/* Left Content */}
-                                <div className="col-span-1 md:col-span-3 p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-center sm:justify-between relative">
+                                <div className="col-span-1 md:col-span-3 p-4 sm:p-6 flex flex-col items-center md:flex-row md:items-center justify-center md:justify-between relative">
                                     <div className="absolute inset-0 bg-white/0 group-hover/row:bg-white/[0.02] transition-colors duration-500" />
-                                    <h1 className="text-xl sm:text-3xl md:text-5xl font-bold text-white tracking-tight relative z-10">
+                                    <h1 className="text-xl sm:text-3xl md:text-5xl font-bold text-white tracking-tight relative z-10 text-center md:text-left">
                                         Aditya Ojha
                                     </h1>
                                     <div className="text-[10px] sm:text-xs text-slate-200 font-mono mt-1 sm:mt-0 relative z-10 flex items-center gap-2 sm:gap-3">
@@ -381,13 +381,13 @@ const Hero = () => {
 
                     {/* Row 2: Tagline & Contact (Full Width) */}
                     <div className="w-full border-b border-grid relative group/row overflow-hidden">
-                        <div className="max-w-5xl mx-auto border-x border-grid relative z-10 overflow-hidden">
+                        <div className="max-w-5xl mx-auto border-x border-grid relative z-10 overflow-hidden bg-black/80 md:bg-transparent">
                             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] brightness-100 contrast-100 mix-blend-overlay pointer-events-none"></div>
                             <div className="grid grid-cols-1 md:grid-cols-4 relative z-10">
                                 {/* Left Content */}
-                                <div className="col-span-1 md:col-span-3 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-center sm:justify-between relative overflow-hidden">
+                                <div className="col-span-1 md:col-span-3 p-4 sm:p-6 flex flex-col items-center md:flex-row md:items-center justify-center md:justify-between relative overflow-hidden">
                                     <div className="absolute inset-0 bg-white/0 group-hover/row:bg-white/[0.02] transition-colors duration-500" />
-                                    <p className="text-xs sm:text-base text-white font-light tracking-wide text-left relative z-10 w-full break-words pr-2">
+                                    <p className="text-xs sm:text-base text-white font-light tracking-wide text-center md:text-left relative z-10 w-full break-words">
                                         Full Stack Developer crafting systems with <span className="text-white font-medium whitespace-nowrap">design intuition</span>.
                                     </p>
                                     <a href="mailto:thisisadityaojha@gmail.com" className="text-[10px] sm:text-sm text-slate-200 hover:text-white transition-colors mt-1 sm:mt-2 relative z-10 flex items-center gap-1 sm:gap-2 whitespace-nowrap">
@@ -413,7 +413,7 @@ const Hero = () => {
 
                     {/* Row 3: Status & Socials (Full Width) */}
                     <div className="w-full border-b border-grid relative group/row overflow-hidden">
-                        <div className="max-w-5xl mx-auto border-x border-grid relative z-10 overflow-hidden">
+                        <div className="max-w-5xl mx-auto border-x border-grid relative z-10 overflow-hidden bg-black/80 md:bg-transparent">
                             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] brightness-100 contrast-100 mix-blend-overlay pointer-events-none"></div>
                             <div className="grid grid-cols-1 md:grid-cols-4 relative z-10">
                                 {/* Left Content */}
