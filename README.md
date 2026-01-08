@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="professional_portfolio/src/public/tech/Profile_pic.png" target="_blank" rel="noopener noreferrer" alt="Portfolio Preview" width="120" style="border-radius: 50%;" />
+  <img src="professional_portfolio/src/public/tech/Profile_pic.png" alt="Portfolio Preview" width="120" style="border-radius: 50%;" />
 </p>
 
 <h1 align="center">Aditya Ojha — Developer Portfolio</h1>
@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://adityaojha.vercel.app">🌐 Live Site</a> •
+  <a href="https://adityaojha.vercel.app" target="_blank" rel="noopener noreferrer" >🌐 Live Site</a> •
   <a href="#features">✨ Features</a> •
   <a href="#tech-stack">🛠 Tech Stack</a> •
   <a href="#architecture">📐 Architecture</a> •
