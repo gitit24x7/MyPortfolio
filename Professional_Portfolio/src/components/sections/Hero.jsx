@@ -316,10 +316,10 @@ const Hero = () => {
                     <NeonGrid gradient={activeGradient} />
 
                     {/* Mobile Only: Profile Image Hero */}
-                    <div className="md:hidden w-full border-y border-grid relative overflow-hidden">
-                        <div className="max-w-5xl mx-auto border-x border-grid">
+                    <div className="md:hidden w-full border-y border-grid relative">
+                        <div className="max-w-5xl mx-auto border-x border-grid box-border">
                             <div
-                                className="w-full h-48 sm:h-64 relative overflow-hidden"
+                                className="w-full h-48 sm:h-64 relative"
                                 style={{
                                     backgroundImage: `url(${PROFILE_IMG_URL})`,
                                     backgroundSize: 'cover',
