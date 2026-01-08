@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="adityaojha.vercel.app">🌐 Live Site</a> •
+  <a href="https://adityaojha.vercel.app">🌐 Live Site</a> •
   <a href="#features">✨ Features</a> •
   <a href="#tech-stack">🛠 Tech Stack</a> •
   <a href="#architecture">📐 Architecture</a> •
