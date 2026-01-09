@@ -23,13 +23,13 @@ const gradients = [
     }
 ];
 
-// Background Component - constrained to left 75% (col-span-3)
+// Background Component - constrained to left 75% on desktop, full width on mobile
 const NeonGrid = ({ gradient }) => {
     return (
         <div className="absolute inset-0 overflow-hidden pointer-events-none flex justify-center">
             <div className="w-full max-w-5xl relative">
-                {/* Container for left 75% only */}
-                <div className="absolute inset-y-0 left-0 w-3/4 overflow-hidden">
+                {/* Container for full width on mobile, left 75% on desktop */}
+                <div className="absolute inset-y-0 left-0 w-full md:w-3/4 overflow-hidden">
 
                     {/* ============================================
                         STELLAR HORIZON - Premium Cinematic Background
@@ -340,12 +340,12 @@ const Hero = () => {
                             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] brightness-100 contrast-100 mix-blend-overlay pointer-events-none"></div>
                             <div className="grid grid-cols-1 md:grid-cols-4 relative z-10">
                                 {/* Left Content */}
-                                <div className="col-span-1 md:col-span-3 p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-center sm:justify-between relative">
+                                <div className="col-span-1 md:col-span-3 p-4 sm:p-6 flex flex-col items-center md:flex-row md:items-center justify-center md:justify-between relative">
                                     <div className="absolute inset-0 bg-white/0 group-hover/row:bg-white/[0.02] transition-colors duration-500" />
-                                    <h1 className="text-xl sm:text-3xl md:text-5xl font-bold text-white tracking-tight relative z-10">
+                                    <h1 className="text-xl sm:text-3xl md:text-5xl font-bold text-white tracking-tight relative z-10 text-center md:text-left">
                                         Aditya Ojha
                                     </h1>
-                                    <div className="text-[10px] sm:text-xs text-slate-200 font-mono mt-1 sm:mt-0 relative z-10 flex items-center gap-2 sm:gap-3">
+                                    <div className="text-[10px] sm:text-xs text-slate-300 font-mono mt-1 sm:mt-0 relative z-10 flex items-center gap-2 sm:gap-3">
                                         <span>SYS: v3.0.0</span>
                                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 animate-pulse" />
                                         <span className="opacity-80">ONLINE</span>
@@ -385,12 +385,12 @@ const Hero = () => {
                             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] brightness-100 contrast-100 mix-blend-overlay pointer-events-none"></div>
                             <div className="grid grid-cols-1 md:grid-cols-4 relative z-10">
                                 {/* Left Content */}
-                                <div className="col-span-1 md:col-span-3 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-center sm:justify-between relative overflow-hidden">
+                                <div className="col-span-1 md:col-span-3 p-4 sm:p-6 flex flex-col items-center md:flex-row md:items-center justify-center md:justify-between relative overflow-hidden">
                                     <div className="absolute inset-0 bg-white/0 group-hover/row:bg-white/[0.02] transition-colors duration-500" />
-                                    <p className="text-xs sm:text-base text-white font-light tracking-wide text-left relative z-10 w-full break-words pr-2">
+                                    <p className="text-xs sm:text-base text-white font-light tracking-wide text-center md:text-left relative z-10 w-full break-words">
                                         Full Stack Developer crafting systems with <span className="text-white font-medium whitespace-nowrap">design intuition</span>.
                                     </p>
-                                    <a href="mailto:thisisadityaojha@gmail.com" className="text-[10px] sm:text-sm text-slate-200 hover:text-white transition-colors mt-1 sm:mt-2 relative z-10 flex items-center gap-1 sm:gap-2 whitespace-nowrap">
+                                    <a href="mailto:thisisadityaojha@gmail.com" className="text-[10px] sm:text-sm text-slate-300 hover:text-white transition-colors mt-1 sm:mt-2 relative z-10 flex items-center gap-1 sm:gap-2 whitespace-nowrap">
                                         <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
                                         thisisadityaojha@gmail.com
                                     </a>
@@ -426,19 +426,19 @@ const Hero = () => {
                                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                             <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-emerald-500"></span>
                                         </span>
-                                        <span className="text-[10px] sm:text-xs text-emerald-300/80 font-medium tracking-wide">Available for opportunities</span>
+                                        <span className="text-[10px] sm:text-xs text-emerald-400 font-medium tracking-wide">Available for opportunities</span>
                                     </div>
 
                                     {/* Location Info */}
-                                    <div className="flex items-center gap-3 sm:gap-6 text-[10px] sm:text-xs font-mono text-slate-200 relative z-10 mt-2 sm:mt-0">
+                                    <div className="flex items-center gap-3 sm:gap-6 text-[10px] sm:text-xs font-mono text-slate-300 relative z-10 mt-2 sm:mt-0">
                                         <div className="flex items-center gap-1.5 group cursor-default">
-                                            <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-300 group-hover:text-emerald-400 transition-colors" />
-                                            <span className="hidden sm:inline text-slate-200 dark:text-slate-200">Currently:</span>
+                                            <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 group-hover:text-emerald-400 transition-colors" />
+                                            <span className="hidden sm:inline text-slate-400">Currently:</span>
                                             <span className="group-hover:text-white transition-colors text-white">Bengaluru</span>
                                         </div>
                                         <div className="w-px h-3 bg-slate-600" />
                                         <div className="flex items-center gap-1.5 group cursor-default">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-300 group-hover:text-amber-400 transition-colors">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 group-hover:text-amber-400 transition-colors">
                                                 <path d="M4 21h16" />
                                                 <path d="M7 21V7" />
                                                 <path d="M17 21V7" />
@@ -447,22 +447,22 @@ const Hero = () => {
                                                 <path d="M6 4h2v3H6z" />
                                                 <path d="M16 4h2v3h-2z" />
                                             </svg>
-                                            <span className="hidden sm:inline text-slate-200 dark:text-slate-200">From:</span>
+                                            <span className="hidden sm:inline text-slate-400">From:</span>
                                             <span className="group-hover:text-white transition-colors text-white">Hyderabad</span>
                                         </div>
                                     </div>
 
                                     {/* Socials */}
                                     <nav className="flex items-center gap-4 sm:gap-6 mt-2 sm:mt-0 relative z-10" aria-label="Social media links">
-                                        <a href="https://github.com/gitit24x7" target="_blank" rel="noopener noreferrer" aria-label="Visit Aditya's GitHub profile" className="text-slate-200 hover:text-white transition-colors transform hover:scale-110 duration-200">
+                                        <a href="https://github.com/gitit24x7" target="_blank" rel="noopener noreferrer" aria-label="Visit Aditya's GitHub profile" className="text-slate-300 hover:text-white transition-colors transform hover:scale-110 duration-200">
                                             <Github className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                                         </a>
                                         <div className="h-3 sm:h-4 w-px bg-slate-600" aria-hidden="true" />
-                                        <a href="https://linkedin.com/in/ojhaadityaa" target="_blank" rel="noopener noreferrer" aria-label="Connect with Aditya on LinkedIn" className="text-slate-200 hover:text-white transition-colors transform hover:scale-110 duration-200">
+                                        <a href="https://linkedin.com/in/ojhaadityaa" target="_blank" rel="noopener noreferrer" aria-label="Connect with Aditya on LinkedIn" className="text-slate-300 hover:text-white transition-colors transform hover:scale-110 duration-200">
                                             <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                                         </a>
                                         <div className="h-3 sm:h-4 w-px bg-slate-600" aria-hidden="true" />
-                                        <a href="https://x.com/buggy247_?s=21" target="_blank" rel="noopener noreferrer" aria-label="Follow Aditya on X (Twitter)" className="text-slate-200 hover:text-white transition-colors transform hover:scale-110 duration-200">
+                                        <a href="https://x.com/buggy247_?s=21" target="_blank" rel="noopener noreferrer" aria-label="Follow Aditya on X (Twitter)" className="text-slate-300 hover:text-white transition-colors transform hover:scale-110 duration-200">
                                             <Twitter className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                                         </a>
                                     </nav>
