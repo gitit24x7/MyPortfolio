@@ -234,7 +234,7 @@ const Nav = () => {
                                         <motion.span
                                             className="absolute inset-0 rounded-full"
                                             style={{
-                                                backgroundColor: isDark ? 'rgba(251, 191, 36, 0.3)' : 'rgba(139, 92, 246, 0.3)'
+                                                backgroundColor: isDark ? 'rgba(251, 191, 36, 0.3)' : 'rgba(255, 255, 255, 0.3)'
                                             }}
                                             variants={rippleVariants}
                                             initial="initial"
@@ -243,7 +243,7 @@ const Nav = () => {
                                         <motion.span
                                             className="absolute inset-0 rounded-full"
                                             style={{
-                                                backgroundColor: isDark ? 'rgba(251, 191, 36, 0.2)' : 'rgba(139, 92, 246, 0.2)'
+                                                backgroundColor: isDark ? 'rgba(251, 191, 36, 0.2)' : 'rgba(255, 255, 255, 0.2)'
                                             }}
                                             variants={rippleVariants}
                                             initial="initial"
@@ -283,7 +283,7 @@ const Nav = () => {
                                         exit="exit"
                                         whileHover="hover"
                                     >
-                                        <Moon className="w-5 h-5 text-purple-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]" />
+                                        <Moon className="w-5 h-5 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -292,7 +292,7 @@ const Nav = () => {
                             <motion.div
                                 className="absolute inset-0 rounded-full border-2"
                                 style={{
-                                    borderColor: isDark ? 'rgba(139, 92, 246, 0.3)' : 'rgba(251, 191, 36, 0.3)'
+                                    borderColor: isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(251, 191, 36, 0.3)'
                                 }}
                                 animate={{
                                     scale: isAnimating ? [1, 1.5, 1] : 1,
