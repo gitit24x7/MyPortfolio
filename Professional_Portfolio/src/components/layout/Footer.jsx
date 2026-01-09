@@ -45,10 +45,29 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="py-4 sm:py-8 px-4 sm:px-6 text-center">
-                    <p className="text-[10px] sm:text-sm text-slate-500 dark:text-slate-500 font-mono">
-                        © {new Date().getFullYear()} Aditya Ojha. Built with React & Tailwind.
-                    </p>
+                <div className="py-4 sm:py-8 px-4 sm:px-6">
+                    <div className="flex flex-col items-center gap-3 text-center">
+                        <p className="text-[10px] sm:text-sm text-slate-500 dark:text-slate-500 font-mono">
+                            © {new Date().getFullYear()} Aditya Ojha. Built with React & Tailwind.
+                        </p>
+                        <div className="flex items-center gap-4">
+                            <a
+                                href="/llms.txt"
+                                target="_blank"
+                                className="text-[10px] sm:text-xs text-slate-400 dark:text-slate-600 hover:text-slate-700 dark:hover:text-slate-300 font-mono transition-colors"
+                            >
+                                llms.txt
+                            </a>
+                            <span className="text-slate-300 dark:text-slate-700">|</span>
+                            <a
+                                href="/privacy.md"
+                                target="_blank"
+                                className="text-[10px] sm:text-xs text-slate-400 dark:text-slate-600 hover:text-slate-700 dark:hover:text-slate-300 font-mono transition-colors"
+                            >
+                                Privacy
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </footer>

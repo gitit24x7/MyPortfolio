@@ -57,29 +57,36 @@ const TechStack = () => {
                 </div>
             </div>
 
-            {/* Row 3: Grid */}
+            {/* Row 3: Compact Grid - 4 icons per group in 2x2 layout */}
             <div className="w-full border-b border-grid">
                 <div className="max-w-5xl mx-auto border-x border-grid">
                     <div className="grid grid-cols-2 md:grid-cols-4">
-                        {technologies.map((tech, index) => (
+                        {/* Each cell contains 4 tech icons in a 2x2 grid */}
+                        {[0, 4, 8, 12].map((startIndex) => (
                             <div
-                                key={index}
-                                className="bg-slate-50/50 dark:bg-black/50 p-8 flex flex-col items-center justify-center gap-4 group hover:bg-white dark:hover:bg-black transition-colors relative border-r border-b border-grid last:border-r-0 md:last:border-r-0 [&:nth-child(2n)]:border-r-0 md:[&:nth-child(2n)]:border-r [&:nth-child(4n)]:border-r-0"
+                                key={startIndex}
+                                className="bg-slate-50/50 dark:bg-black/50 p-4 group hover:bg-white dark:hover:bg-black transition-colors relative border-r border-b border-grid last:border-r-0 md:last:border-r-0 [&:nth-child(2n)]:border-r-0 md:[&:nth-child(2n)]:border-r [&:nth-child(4n)]:border-r-0"
                             >
-                                {/* Detailed Hover Effect - Diagonal Scanline */}
+                                {/* Hover Effect */}
                                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500">
                                     <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.05)_50%,transparent_75%)] dark:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%)] bg-[length:250%_250%] animate-[shimmer_2s_infinite]" />
                                 </div>
 
-                                <img
-                                    src={tech.icon}
-                                    alt={tech.name}
-                                    className={`w-12 h-12 object-contain transition-transform group-hover:scale-110 duration-300 ${tech.className || ''}`}
-                                />
-
-                                <div className="text-center">
-                                    <div className="text-slate-900 dark:text-slate-50 font-medium mb-1 transition-colors">{tech.name}</div>
-                                    <div className="text-xs text-slate-500 dark:text-slate-500 font-mono transition-colors">{tech.description}</div>
+                                {/* 2x2 Grid of Icons */}
+                                <div className="grid grid-cols-2 gap-3 relative z-10">
+                                    {technologies.slice(startIndex, startIndex + 4).map((tech, i) => (
+                                        <div
+                                            key={i}
+                                            className="flex items-center justify-center p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-default"
+                                            title={`${tech.name} - ${tech.description}`}
+                                        >
+                                            <img
+                                                src={tech.icon}
+                                                alt={tech.name}
+                                                className={`w-8 h-8 object-contain transition-transform hover:scale-110 duration-300 ${tech.className || ''}`}
+                                            />
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         ))}

@@ -488,7 +488,7 @@ const Hero = () => {
                 <div className="w-full border-b border-grid bg-slate-50 dark:bg-black transition-colors duration-500">
                     <div className="max-w-5xl mx-auto border-x border-grid py-10 sm:py-20 px-4 sm:px-6 text-center relative">
                         <h1 className="text-3xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-slate-900 dark:text-slate-50 leading-none transition-colors duration-500">
-                            Building beautiful,
+                            Building <span className="bg-[#8b5cf6]/30 dark:bg-[#8b5cf6]/50 px-2 py-0.5 rounded-lg">beautiful</span>,
                             <br />
                             performant web
                             <br />

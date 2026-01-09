@@ -11,7 +11,7 @@ const projects = [
         title: "React Mastery",
         description: "A quick practice platforom for react to build muscle memory, with little to less knowledge of ReactJS",
         tech: ["ReactJS", "Tailwind CSS", "Supabase", "Framer Motion", "PostgreSQL"],
-        size: "large", // spans 2 cols
+        size: "large",
         color: "bg-blue-500/10",
         liveUrl: "https://reactmastery.xyz",
         githubUrl: "https://github.com/"
@@ -19,7 +19,7 @@ const projects = [
     {
         title: "Headerly",
         description: "Create Professional high conversion linkedin banners within 60s for free",
-        tech: ["React", "TypeScript", "TailwindCSS","Lenis","Framer Motion"],
+        tech: ["React", "TypeScript", "TailwindCSS", "Lenis", "Framer Motion"],
         size: "small",
         color: "bg-purple-500/10"
     },
@@ -90,6 +90,7 @@ const Projects = () => {
                                     group relative p-6 rounded-3xl border border-slate-200 dark:border-white/10 overflow-hidden
                                     bg-white dark:bg-black
                                     hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300
+                                    shadow-none hover:shadow-[0_0_1px_0px_rgba(255,165,0,1),0_0_3px_-1px_rgba(255,215,0,0.9)]
                                     ${project.size === 'large' ? 'md:col-span-2' : 'md:col-span-1'}
                                 `}
                             >

@@ -1,0 +1,45 @@
+# Aditya Ojha's Portfolio
+
+> Full Stack Developer crafting systems with design intuition.
+
+## About
+This portfolio showcases my work as a Full Stack Developer with expertise in React, Next.js, TypeScript, Node.js, and cloud technologies. I build premium web experiences with attention to design, performance, and user experience.
+
+## Contact
+- Email: thisisadityaojha@gmail.com
+- LinkedIn: https://linkedin.com/in/ojhaadityaa
+- GitHub: https://github.com/gitit24x7
+- Twitter/X: https://x.com/buggy247_
+
+## Projects
+
+### React Mastery
+A quick practice platform for React to build muscle memory, with minimal prior ReactJS knowledge required.
+- URL: https://reactmastery.xyz
+- Tech: ReactJS, Tailwind CSS, Supabase, Framer Motion, PostgreSQL
+
+### Headerly
+Create professional, high-conversion LinkedIn banners within 60 seconds for free.
+- Tech: React, TypeScript, TailwindCSS, Lenis, Framer Motion
+
+### DevTools CLI
+Command line tool for scaffolding React projects with best practices built-in.
+- Tech: Node.js, Ink, Chalk
+
+## Technical Stack
+- Frontend: React, Next.js, TypeScript, Tailwind CSS
+- Backend: Node.js, Supabase, PostgreSQL, MongoDB
+- Tools: Docker, Git, Playwright, Figma
+- Animation: Framer Motion
+
+## AI Assistance Disclosure
+This portfolio was built with assistance from AI coding tools for:
+- Code generation and optimization
+- Design system implementation
+- Documentation writing
+
+The architecture decisions, creative direction, and final implementations are my own work.
+
+## Licensing
+© 2024-2025 Aditya Ojha. All rights reserved.
+Portfolio code structure available for reference. Please do not copy designs directly.
