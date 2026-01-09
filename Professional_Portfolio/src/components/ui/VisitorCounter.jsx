@@ -9,35 +9,43 @@ const VisitorCounter = () => {
     useEffect(() => {
         const fetchCount = async () => {
             try {
-                // Reverting to V1 because V2 CORS policies block 'Authorization' header from browsers
                 const namespace = import.meta.env.VITE_COUNTER_NAMESPACE || 'aditya-ojhas-team-2251';
                 const key = import.meta.env.VITE_COUNTER_KEY || 'Visitors_count';
-                // Token is not used in V1 public endpoints
 
                 const isNewVisitor = !localStorage.getItem('visit_counted');
                 const baseUrl = `https://api.counterapi.dev/v1/${namespace}/${key}`;
                 const endpoint = isNewVisitor ? `${baseUrl}/up` : baseUrl;
 
-                const options = {
-                    method: 'GET',
-                    credentials: 'omit', // Prevent cookie/auth issues
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                };
+                // Try direct fetch first
+                let response;
+                let usedProxy = false;
 
-                let response = await fetch(endpoint, options);
+                try {
+                    response = await fetch(endpoint, {
+                        method: 'GET',
+                        credentials: 'omit',
+                        mode: 'cors'
+                    });
+                } catch (corsError) {
+                    // If direct fetch fails (likely CORS), try through proxy
+                    console.warn('Direct fetch failed, trying CORS proxy...');
+                    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(endpoint)}`;
+                    response = await fetch(proxyUrl);
+                    usedProxy = true;
+                }
 
-                // If increment failed (e.g. rate limit), try falling back to just reading the count
+                // If increment failed, try read-only
                 if (!response.ok && isNewVisitor) {
                     console.warn(`Increment failed (${response.status}), falling back to read-only`);
-                    response = await fetch(baseUrl, options);
+                    const readUrl = usedProxy
+                        ? `https://corsproxy.io/?${encodeURIComponent(baseUrl)}`
+                        : baseUrl;
+                    response = await fetch(readUrl, { credentials: 'omit', mode: 'cors' });
                 }
 
                 if (response.ok) {
                     const data = await response.json();
                     setCount(data.count);
-                    // Mark as visited so we don't spam the increment endpoint on refresh
                     localStorage.setItem('visit_counted', 'true');
                 } else {
                     console.warn(`API Error: ${response.status}`);
