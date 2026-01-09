@@ -22,14 +22,14 @@ We integrated **CounterAPI.dev**, a free, publicly accessible counting service.
     *   *Why?* The portfolio is hosted as a static site (SPA). Introducing a backend just for a counter complicates deployment and potentially adds cost.
 2.  **LocalStorage for Uniqueness**: We use `localStorage` to flag if a user has already visited.
     *   *Why?* To prevent a single user from inflating the count by refreshing the page 100 times. It's a simple, privacy-friendly way to track "sessions" without cookies or IP fingerprinting.
-3.  **Fallback Mechanism**: If the API fails (down, rate-limited, blocked), we show a static number (`1024`).
-    *   *Why?* A broken UI component ("Loading..." forever or blank space) is worse than a fake number. Graceful degradation is a key frontend principle.
+3.  **Smart Fallback Mechanism**: If the *Increment* API call fails (rate-limit, duplicate check), we attempt a *Read-Only* fetch.
+    *   *Why?* It's better to show the true count (e.g., `150`) than a fake fallback (`1024`) just because the user refreshed the page too quickly. We only default to `1024` if *both* attempts fail.
 
 ### Challenges Faced
-*   **CORS (Cross-Origin Resource Sharing)**: The V2 endpoint of the API required an `Authorization` header. Browsers automatically block requests with custom authentication headers to 3rd party domains unless that domain explicitly sends an `Access-Control-Allow-Headers` response. CounterAPI did not send this for localhost, strictly blocking our V2 implementation.
-    *   *Resolution*: We reverted to the **V1 Endpoint**, which is public and doesn't verify headers, bypassing the strict CORS preflight check.
-*   **Ad-Blockers**: Privacy extensions (uBlock Origin) often block domains like `counterapi.dev` because they look like trackers.
-    *   *Resolution*: We accepted this limitation for a portfolio, using the fallback value so the design doesn't break for privacy-focused users.
+*   **CORS (Cross-Origin Resource Sharing)**: Localhost requests to V2 endpoints were blocked due to missing headers.
+    *   *Resolution*: We reverted to the **V1 Endpoint**, which is public and permits simple GET requests.
+*   **Rate Limiting & "Spam" Refresh**: Users refreshing the page would trigger multiple increments, potentially banning the IP.
+    *   *Resolution*: We implemented a **Read-Only Fallback**. If `fetch(.../up)` fails (429 Too Many Requests), we catch the error and immediately fire `fetch(...)` (Read Only) to get the data without counting a new visit.
 
 ---
 
@@ -108,25 +108,33 @@ useEffect(() => {
             const isNewVisitor = !localStorage.getItem('visit_counted');
             
             // 5. Dynamic Endpoint Construction
-            // If new: hit '/up' to increment. If returning: hit base url to just read.
-            const endpoint = `https://api.counterapi.dev/v1/${namespace}/${key}${isNewVisitor ? '/up' : ''}`;
+            const baseUrl = `https://api.counterapi.dev/v1/${namespace}/${key}`;
+            const endpoint = isNewVisitor ? `${baseUrl}/up` : baseUrl;
 
             // 6. The Network Call
-            // credentials: 'omit' ensures we don't send cookies, reducing CORS complexity
-            const response = await fetch(endpoint, {
+            const options = {
                 method: 'GET',
                 credentials: 'omit',
                 headers: { 'Content-Type': 'application/json' }
-            });
+            };
 
-            // 7. Success Handling
+            let response = await fetch(endpoint, options);
+
+            // 7. SMART FALLBACK: If increment failed (e.g., already counted or rate limited),
+            // try fetching the number read-only so we don't show a fake "1024".
+            if (!response.ok && isNewVisitor) {
+                console.warn('Increment failed, falling back to read-only');
+                response = await fetch(baseUrl, options);
+            }
+
+            // 8. Success Handling
             if (response.ok) {
                 const data = await response.json();
                 setCount(data.count);
-                // 8. Lock the session so next refresh doesn't increment
+                // 9. Lock the session
                 if (isNewVisitor) localStorage.setItem('visit_counted', 'true');
             } else {
-                // 9. Graceful Failure
+                // 10. Ultimate Failure -> Default
                 console.warn(`API Error: ${response.status}`);
                 setCount(1024);
             }

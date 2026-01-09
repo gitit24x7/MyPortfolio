@@ -15,25 +15,36 @@ const VisitorCounter = () => {
                 // Token is not used in V1 public endpoints
 
                 const isNewVisitor = !localStorage.getItem('visit_counted');
-                const endpoint = `https://api.counterapi.dev/v1/${namespace}/${key}${isNewVisitor ? '/up' : ''}`;
+                const baseUrl = `https://api.counterapi.dev/v1/${namespace}/${key}`;
+                const endpoint = isNewVisitor ? `${baseUrl}/up` : baseUrl;
 
-                const response = await fetch(endpoint, {
+                const options = {
                     method: 'GET',
                     credentials: 'omit', // Prevent cookie/auth issues
                     headers: {
                         'Content-Type': 'application/json'
                     }
-                });
+                };
+
+                let response = await fetch(endpoint, options);
+
+                // If increment failed (e.g. rate limit), try falling back to just reading the count
+                if (!response.ok && isNewVisitor) {
+                    console.warn(`Increment failed (${response.status}), falling back to read-only`);
+                    response = await fetch(baseUrl, options);
+                }
 
                 if (response.ok) {
                     const data = await response.json();
                     setCount(data.count);
-                    if (isNewVisitor) localStorage.setItem('visit_counted', 'true');
+                    // Mark as visited so we don't spam the increment endpoint on refresh
+                    localStorage.setItem('visit_counted', 'true');
                 } else {
                     console.warn(`API Error: ${response.status}`);
                     setCount(1024);
                 }
             } catch (error) {
+                console.error('Visitor counter error:', error);
                 setCount(1024);
             } finally {
                 setLoading(false);
