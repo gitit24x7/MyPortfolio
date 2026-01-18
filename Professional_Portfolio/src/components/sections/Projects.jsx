@@ -31,10 +31,12 @@ const projects = [
         color: "bg-emerald-500/10"
     },
     {
-        title: "SaaS Landing Page",
-        description: "High-conversion landing page with scroll animations and 3D elements.",
-        tech: ["React", "Three.js", "Framer Motion"],
+        title: "Psachno",
+        description: "Beginner friendly Open source issues finder",
+        tech: ["React", "Reactbits", "TailwindCSS", "ExpressJS", "Render.com"],
         size: "large",
+        liveUrl: "https://psachno.vercel.app",
+        githubUrl: "https://github.com/gitit24x7/Psankho",
         color: "bg-orange-500/10"
     }
 ]

@@ -1,9 +1,9 @@
-# Aditya Ojha's Portfolio
+# Aditya Ojha's Portfolio & Tech Blog
 
 > Full Stack Developer crafting systems with design intuition.
 
 ## About
-This portfolio showcases my work as a Full Stack Developer with expertise in React, Next.js, TypeScript, Node.js, and cloud technologies. I build premium web experiences with attention to design, performance, and user experience.
+This site serves as my professional portfolio and technical engineering blog. It showcases my work as a Full Stack Developer with expertise in React, Next.js, TypeScript, Node.js, and cloud technologies. I build premium web experiences with attention to design, performance, and user experience.
 
 ## Contact
 - Email: thisisadityaojha@gmail.com

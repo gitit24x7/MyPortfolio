@@ -12,8 +12,8 @@
   <meta name="color-scheme" content="dark light" />
 
   <!-- SEO Primary Tags -->
-  <title>Aditya Ojha | Full Stack Developer & Software Engineer</title>
-  <meta name="title" content="Aditya Ojha | Full Stack Developer & Software Engineer">
+  <title>Aditya Ojha | Full Stack Developer, Software Engineer & Tech Blogger</title>
+  <meta name="title" content="Aditya Ojha | Full Stack Developer, Software Engineer & Tech Blogger">
   <meta name="description"
     content="Aditya Ojha is a Specialist Software Engineer and Full Stack Developer based in Bengaluru/Hyderabad. Crafting beautiful, performant web experiences with React, Node.js, and modern design systems.">
   <meta name="keywords"
@@ -25,7 +25,7 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://adityaojha.com/">
-  <meta property="og:title" content="Aditya Ojha | Full Stack Developer">
+  <meta property="og:title" content="Aditya Ojha | Full Stack Developer & Tech Blogger">
   <meta property="og:description"
     content="Architecting digital ecosystems with precision and passion. View my portfolio of work and get in touch.">
   <meta property="og:image" content="https://adityaojha.com/tech/Profile_pic.png">
@@ -35,7 +35,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://adityaojha.com/">
-  <meta name="twitter:title" content="Aditya Ojha | Full Stack Developer">
+  <meta name="twitter:title" content="Aditya Ojha | Full Stack Developer & Tech Blogger">
   <meta name="twitter:description"
     content="Architecting digital ecosystems with precision and passion. View my portfolio of work and get in touch.">
   <meta name="twitter:image" content="https://adityaojha.com/tech/Profile_pic.png">
@@ -45,25 +45,58 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Aditya Ojha",
-    "url": "https://adityaojha.com",
-    "image": "https://adityaojha.com/tech/Profile_pic.png",
-    "jobTitle": "Full Stack Developer",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Freelance"
-    },
-    "sameAs": [
-      "https://github.com/gitit24x7",
-      "https://linkedin.com/in/ojhaadityaa",
-      "https://x.com/buggy247_"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bengaluru",
-      "addressCountry": "IN"
-    }
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://adityaojha.com/#person",
+        "name": "Aditya Ojha",
+        "url": "https://adityaojha.com",
+        "image": "https://adityaojha.com/tech/Profile_pic.png",
+        "jobTitle": "Full Stack Developer",
+        "description": "Specialist Software Engineer and Full Stack Developer based in Bengaluru/Hyderabad.",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Freelance"
+        },
+        "sameAs": [
+          "https://github.com/gitit24x7",
+          "https://linkedin.com/in/ojhaadityaa",
+          "https://x.com/buggy247_"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bengaluru",
+          "addressCountry": "IN"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://adityaojha.com/#website",
+        "url": "https://adityaojha.com",
+        "name": "Aditya Ojha | Full Stack Developer & Tech Blog",
+        "description": "Personal portfolio and technical blog of Aditya Ojha. Exploring software engineering, React, Node.js, and modern web development.",
+        "publisher": {
+          "@id": "https://adityaojha.com/#person"
+        },
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://adityaojha.com/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Blog",
+        "@id": "https://adityaojha.com/#blog",
+        "url": "https://adityaojha.com/#blog",
+        "name": "Aditya Ojha's Engineering Blog",
+        "description": "Deep dives into Full Stack Development, Software Architecture, and Modern Web Technologies.",
+        "publisher": {
+          "@id": "https://adityaojha.com/#person"
+        },
+        "inLanguage": "en-US"
+      }
+    ]
   }
   </script>
 
