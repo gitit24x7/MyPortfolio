@@ -21,7 +21,9 @@ const projects = [
         description: "Create Professional high conversion linkedin banners within 60s for free",
         tech: ["React", "TypeScript", "TailwindCSS", "Lenis", "Framer Motion"],
         size: "small",
-        color: "bg-purple-500/10"
+        color: "bg-purple-500/10",
+        liveUrl: "https://reactmastery.xyz",
+        githubUrl: "https://github.com/"
     },
     {
         title: "DevTools CLI",
@@ -66,7 +68,7 @@ const Projects = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end px-6 md:px-12 py-8">
                         <div>
                             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-0 tracking-tight transition-colors">
-                                Selected Work.
+                                PROJECTS.
                             </h2>
                         </div>
                         <div>
