@@ -269,4 +269,140 @@ Then move to **Phase 1.1: Backend Project Setup** — creating your first Expres
 
 ---
 
-*Last Updated: 2026-01-12*
+## 🐛 Troubleshooting Log
+
+### MongoDB Atlas Connection Issues (Solved ✅)
+
+**Date:** 2026-01-17 to 2026-01-19
+
+#### Problem Summary
+MongoDB Atlas connection was hanging indefinitely, preventing the server from starting properly. The connection attempt would not timeout and no error messages were displayed.
+
+#### Issues Encountered & Solutions
+
+##### 1. **Node.js Version Compatibility (BSON Error)**
+**Problem:** 
+- Node.js v22 and v24 had compatibility issues with the MongoDB BSON library
+- Error: `Cannot read property 'BSON.onDemand.NumberUtils.getInt32LE'`
+
+**Attempted Solutions:**
+- Tried downgrading to Node v20 using `nvm-windows`
+- Reinstalled dependencies multiple times
+- Updated mongoose and mongodb packages to latest versions
+
+**Final Solution:**
+- Downgraded `mongodb` driver to version `6.3.0` specifically
+- Command: `npm install mongodb@6.3.0`
+- This version has better compatibility with newer Node versions
+
+##### 2. **Wrong Working Directory**
+**Problem:**
+- Running `node server.js` from `blog/server/src/` directory
+- `.env` file is located in `blog/server/` (one level up)
+- `dotenv` couldn't find the environment variables
+- Error: `Connection string: Missing!` and `The uri parameter to openUri() must be a string, got undefined`
+
+**Solution:**
+- **ALWAYS run the server from `blog/server/` directory** (where `package.json` is)
+- Correct command: `node src/server.js` (from the `blog/server` folder)
+- OR use: `npm run dev` which runs the correct path automatically
+
+##### 3. **Password Reset Required**
+**Problem:**
+- Original MongoDB Atlas password may have been incorrect or expired
+- Connection would hang without clear error message
+
+**Solution:**
+- Reset password in MongoDB Atlas:
+  1. Go to atlas.mongodb.com → Database Access
+  2. Click "Edit" on the user
+  3. Click "Edit Password"
+  4. Generate new secure password
+  5. Copy the new password immediately
+  6. Update `.env` file with new password
+
+##### 4. **Network Access Configuration**
+**Problem:**
+- IP address not whitelisted in MongoDB Atlas
+
+**Solution:**
+- Verified `0.0.0.0/0` (allow from anywhere) is in Network Access
+- MongoDB Atlas Dashboard → Network Access → Add IP Address → Allow Access from Anywhere
+
+#### Key Learnings
+
+1. **Always run Node.js from the correct directory**
+   - The directory must contain `.env` and `package.json`
+   - Use `npm run dev` instead of `node ...` to avoid path issues
+
+2. **MongoDB driver compatibility matters**
+   - Stick to stable versions (mongodb@6.3.0 works well with Node 22+)
+   - Don't always use `@latest` - sometimes older is more stable
+
+3. **Connection troubleshooting checklist:**
+   - ✅ Is `.env` file in the correct location?
+   - ✅ Is the password correct? (try resetting it)
+   - ✅ Is `0.0.0.0/0` in MongoDB Atlas Network Access?
+   - ✅ Are you running from the correct directory?
+   - ✅ Is the `mongodb` package version compatible?
+
+4. **How to verify successful connection:**
+   - Look for: `✅ MongoDB Connected: [cluster-hostname].mongodb.net`
+   - The cluster hostname (e.g., `ac-hcsd-xyz.mongodb.net`) is unique to your database
+   - This is normal and means connection succeeded
+
+#### Final Working Configuration
+
+**File Structure:**
+```
+blog/server/
+├── .env                    ← Environment variables (DATABASE_URL)
+├── package.json           ← Dependencies
+├── node_modules/
+└── src/
+    └── server.js          ← Server code
+```
+
+**Command to run:**
+```bash
+cd blog/server
+node src/server.js
+# OR
+npm run dev
+```
+
+**Dependencies (package.json):**
+```json
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0",
+    "mongodb": "6.3.0",     ← IMPORTANT: Version 6.3.0
+    "dotenv": "^16.3.1"
+  }
+}
+```
+
+**Expected successful output:**
+```
+Attempting to connect to MongoDB...
+Connection string: Found
+✅ MongoDB Connected: ac-xxxxx-xxxxx.mongodb.net
+
+╔════════════════════════════════════════════════════════════╗
+║   🚀 Blog API Server is running!                           ║
+║   → Local:   http://localhost:3001                         ║
+║   → Health:  http://localhost:3001/health                  ║
+╚════════════════════════════════════════════════════════════╝
+```
+
+#### Status: ✅ RESOLVED
+- MongoDB Atlas connection working
+- Server running successfully
+- API endpoints responding correctly
+- Ready to proceed with Schema definition (Phase 2.2)
+
+---
+
+*Last Updated: 2026-01-19*
+

@@ -44,7 +44,7 @@ const About = () => {
                                 </div>
                                 {/* About Me Image */}
                                 <img
-                                    src="/About me.png"
+                                    src="/About me.webp"
                                     alt="About Me"
                                     className="absolute inset-0 w-full h-full object-cover object-center"
                                 />

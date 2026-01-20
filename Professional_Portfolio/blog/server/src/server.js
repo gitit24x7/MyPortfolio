@@ -17,6 +17,8 @@ import 'dotenv/config';
 
 import express from 'express';
 import mongoose from 'mongoose';
+import postRoutes from './routes/postRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 // What is `express`?
 // - It's a function that, when called, creates an Express application.
@@ -209,6 +211,21 @@ app.get('/health', (req, res) => {
 // - If it returns 200, the server is considered healthy.
 // - If it fails, the system can restart your server or route traffic elsewhere.
 // - This is STANDARD PRACTICE at every tech company.
+
+// ----------------------------------------------------------------------------
+// API ROUTES (Production)
+// ----------------------------------------------------------------------------
+app.use('/api/posts', postRoutes);
+app.use('/api/auth', authRoutes);
+// What does app.use('/api/posts', postRoutes) do?
+// PLAIN ENGLISH: Mount all post routes under /api/posts prefix
+// TECHNICAL: Middleware that delegates all /api/posts/* requests to postRoutes
+//            Example routes created:
+//              GET    /api/posts           → getAllPosts
+//              GET    /api/posts/:slug     → getPostBySlug
+//              POST   /api/posts           → createPost
+//              PUT    /api/posts/:slug     → update Post
+//              DELETE /api/posts/:slug     → deletePost
 
 // ============================================================================
 // STEP 6: Connect to Database (MongoDB)

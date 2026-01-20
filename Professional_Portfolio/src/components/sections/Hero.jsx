@@ -304,7 +304,7 @@ const Hero = () => {
 
 
     // Local Profile Image
-    const PROFILE_IMG_URL = "/tech/Profile_pic.png";
+    const PROFILE_IMG_URL = "/tech/Profile_pic.webp";
 
     return (
         <section className="min-h-screen flex flex-col justify-center relative z-10 transition-colors duration-500">
