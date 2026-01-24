@@ -10,10 +10,10 @@ const About = () => {
                 <div className="max-w-5xl mx-auto border-x border-grid relative z-10 h-16 flex items-center justify-center">
                     <div className="flex items-center gap-3 sm:gap-6 overflow-x-auto no-scrollbar px-3 sm:px-6">
                         <div className="px-3 py-1 sm:px-6 sm:py-1.5 rounded-full border border-slate-200 dark:border-white/10 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 whitespace-nowrap bg-white/80 dark:bg-black/80 backdrop-blur-sm">
-                            System Status: Online
+                            Based: Bengaluru
                         </div>
                         <div className="hidden md:block px-3 py-1 sm:px-6 sm:py-1.5 rounded-full border border-slate-200 dark:border-white/10 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 whitespace-nowrap bg-white/80 dark:bg-black/80 backdrop-blur-sm">
-                            Location: Earth
+                            Remote: Ready
                         </div>
                     </div>
                 </div>

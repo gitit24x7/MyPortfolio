@@ -27,8 +27,9 @@ Command line tool for scaffolding React projects with best practices built-in.
 - Tech: Node.js, Ink, Chalk
 
 ## Technical Stack
-- Frontend: React, Next.js, TypeScript, Tailwind CSS
-- Backend: Node.js, Supabase, PostgreSQL, MongoDB
+- Frontend: React, Next.js, TypeScript, Tailwind CSS, Shadcn UI
+- Backend: Node.js, Supabase, PostgreSQL, MongoDB, C++
+- AI & Automation: LangChain, n8n, Zapier, Make.com, Pinecone, Weaviate
 - Tools: Docker, Git, Playwright, Figma
 - Animation: Framer Motion
 
