@@ -994,6 +994,7 @@ import { getAllPosts, createPost, getPostBySlug, updatePost, deletePost } from '
 - **Technical:** Destructuring named exports from postController.js. The `../` means "go up one folder"
 - **Why:** Separation of concerns - routes only MAP urls, controllers handle LOGIC
 - **What each function does:**
+
   - `getAllPosts` → Returns array of posts
   - `createPost` → Saves new post to database
   - `getPostBySlug` → Finds one specific post

@@ -28,6 +28,15 @@ const technologies = [
     { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg", name: "C++", description: "System Logic" }
 ]
 
+const aiTechnologies = [
+    { icon: "https://avatars.githubusercontent.com/u/126733545?s=200&v=4", name: "LangChain", description: "AI Framework" },
+    { icon: "https://n8n.io/favicon.ico", name: "n8n", description: "Workflow Automation" },
+    { icon: "https://cdn.worldvectorlogo.com/logos/zapier.svg", name: "Zapier", description: "Automation Platform" },
+    { icon: "https://www.make.com/en/favicon.ico", name: "Make.com", description: "Integration Hub" },
+    { icon: "https://avatars.githubusercontent.com/u/19514182?s=200&v=4", name: "Pinecone", description: "Vector Database" },
+    { icon: "https://weaviate.io/favicon.ico", name: "Weaviate", description: "Vector Search" }
+]
+
 const TechStack = () => {
     return (
         <section id="stack" className="relative z-10 transition-colors duration-500">
@@ -85,6 +94,57 @@ const TechStack = () => {
                                                 alt={tech.name}
                                                 className={`w-8 h-8 object-contain transition-transform hover:scale-110 duration-300 ${tech.className || ''}`}
                                             />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* AI Stack Section */}
+            {/* AI Title */}
+            <div className="w-full border-b border-grid">
+                <div className="max-w-5xl mx-auto border-x border-grid">
+                    <div className="px-6 py-6 border-b-0">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 tracking-tight transition-colors">
+                            AI & Automation.
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            {/* Row 3: AI Grid - 3 icons per group in 2 columns */}
+            <div className="w-full border-b border-grid">
+                <div className="max-w-5xl mx-auto border-x border-grid">
+                    <div className="grid grid-cols-1 md:grid-cols-2">
+                        {[0, 3].map((startIndex) => (
+                            <div
+                                key={startIndex}
+                                className="bg-purple-50/30 dark:bg-purple-950/20 p-6 group hover:bg-purple-50 dark:hover:bg-purple-950/40 transition-colors relative border-r border-b border-grid last:border-r-0 md:last:border-r-0 [&:nth-child(2n)]:border-r-0 md:[&:nth-child(2n)]:border-r-0"
+                            >
+                                {/* Hover Effect */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500">
+                                    <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(147,51,234,0.05)_50%,transparent_75%)] dark:bg-[linear-gradient(45deg,transparent_25%,rgba(168,85,247,0.1)_50%,transparent_75%)] bg-[length:250%_250%] animate-[shimmer_2s_infinite]" />
+                                </div>
+
+                                {/* Grid of Icons */}
+                                <div className="grid grid-cols-3 gap-4 relative z-10">
+                                    {aiTechnologies.slice(startIndex, startIndex + 3).map((tech, i) => (
+                                        <div
+                                            key={i}
+                                            className="flex flex-col items-center justify-center p-3 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors cursor-default"
+                                            title={`${tech.name} - ${tech.description}`}
+                                        >
+                                            <img
+                                                src={tech.icon}
+                                                alt={tech.name}
+                                                className={`w-10 h-10 object-contain transition-transform hover:scale-110 duration-300 ${tech.className || ''}`}
+                                            />
+                                            <span className="mt-2 text-xs font-medium text-slate-700 dark:text-slate-300 text-center">
+                                                {tech.name}
+                                            </span>
                                         </div>
                                     ))}
                                 </div>

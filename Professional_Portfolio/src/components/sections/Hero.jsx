@@ -307,9 +307,9 @@ const Hero = () => {
     const PROFILE_IMG_URL = "/tech/Profile_pic.webp";
 
     return (
-        <section className="min-h-screen flex flex-col justify-center relative z-10 transition-colors duration-500">
+        <section className="pt-24 sm:pt-32 pb-0 flex flex-col relative z-10 transition-colors duration-500">
 
-            <div className="mt-10 sm:mt-20">
+            <div>
                 {/* Unified background for profile rows */}
                 <div className="relative" role="region" aria-label="Profile Section">
                     {/* NeonGrid constrained to left 75% of content area */}
@@ -365,14 +365,13 @@ const Hero = () => {
                                 </div>
                                 {/* Right Profile Slice (Top) - Hidden on mobile */}
                                 <div
-                                    className="hidden md:block col-span-1 border-l border-grid relative overflow-hidden transition-all duration-700 filter grayscale hover:grayscale-0 min-h-[120px]"
+                                    className="hidden md:block col-span-1 border-l border-grid relative overflow-hidden min-h-[120px]"
                                     style={{
                                         backgroundImage: `url(${PROFILE_IMG_URL})`,
                                         backgroundSize: '110% 320%',
                                         backgroundPosition: 'center 0%'
                                     }}
                                 >
-                                    <div className="absolute inset-0 bg-slate-900/20 mix-blend-multiply transition-opacity duration-500 group-hover/row:opacity-0" />
                                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
                                 </div>
                             </div>
@@ -397,14 +396,13 @@ const Hero = () => {
                                 </div>
                                 {/* Right Profile Slice (Middle) - Hidden on mobile */}
                                 <div
-                                    className="hidden md:block col-span-1 border-l border-grid relative overflow-hidden transition-all duration-700 filter grayscale hover:grayscale-0 min-h-[80px]"
+                                    className="hidden md:block col-span-1 border-l border-grid relative overflow-hidden min-h-[80px]"
                                     style={{
                                         backgroundImage: `url(${PROFILE_IMG_URL})`,
                                         backgroundSize: '110% 320%',
                                         backgroundPosition: 'center 46%'
                                     }}
                                 >
-                                    <div className="absolute inset-0 bg-slate-900/20 mix-blend-multiply transition-opacity duration-500 group-hover/row:opacity-0" />
                                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
                                 </div>
                             </div>
@@ -469,14 +467,13 @@ const Hero = () => {
                                 </div>
                                 {/* Right Profile Slice (Bottom) - Hidden on mobile */}
                                 <div
-                                    className="hidden md:block col-span-1 border-l border-grid relative overflow-hidden transition-all duration-700 filter grayscale hover:grayscale-0 min-h-[100px]"
+                                    className="hidden md:block col-span-1 border-l border-grid relative overflow-hidden min-h-[100px]"
                                     style={{
                                         backgroundImage: `url(${PROFILE_IMG_URL})`,
                                         backgroundSize: '110% 320%',
                                         backgroundPosition: 'center 100%'
                                     }}
                                 >
-                                    <div className="absolute inset-0 bg-slate-900/20 mix-blend-multiply transition-opacity duration-500 group-hover/row:opacity-0" />
                                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
                                 </div>
                             </div>
@@ -531,6 +528,7 @@ const Hero = () => {
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
     )
