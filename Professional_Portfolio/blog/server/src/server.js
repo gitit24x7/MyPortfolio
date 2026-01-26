@@ -18,6 +18,7 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import postRoutes from './routes/postRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 // What is `express`?
 // - It's a function that, when called, creates an Express application.
 // - This application is an object with methods to:
@@ -213,6 +214,8 @@ app.get('/health', (req, res) => {
 // ----------------------------------------------------------------------------
 // API ROUTES (Production)
 // ----------------------------------------------------------------------------
+// Auth Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 // What does app.use('/api/posts', postRoutes) do?
 // PLAIN ENGLISH: Mount all post routes under /api/posts prefix

@@ -8,6 +8,10 @@
 
 ## 📐 Architecture Overview
 
+![MVC Data Flow Architecture](./images/mvc_architecture.png)
+
+*Figure: How data flows through our Router-Controller-Service-Model layers.*
+
 ```
 blog/
 ├── client/                 # React Frontend (Vite + SSG)
