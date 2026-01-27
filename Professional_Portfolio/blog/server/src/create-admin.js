@@ -7,8 +7,8 @@ import 'dotenv/config';
 
 export const createAdmin = async () => {
     try {
-
-      await mongoose.connect(process.env.DATABASE_URL);
+        console.log(`Looking for user: [${process.env.ADMIN_USERNAME}]`);
+        await mongoose.connect(process.env.DATABASE_URL);
         console.log("Connected to MongoDB");
 
         //we are deleting all existing admins, so that we can create a new admin, in case password is forgotten or admin is deleted.
@@ -17,21 +17,21 @@ export const createAdmin = async () => {
 
         //now we will write the logic to hash the password that the admin would enter
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash("ADMIN_PASSWORD", salt);
+        const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, salt);
         console.log("password hashed successfully");
-        
+
         //now we will create the admin user and the below line is a shortcut that save it as well we do not need to write it separately.
         const admin = await Admin.create({
-    username: "admin",
-    password: hashedPassword
-})
- 
+            username: process.env.ADMIN_USERNAME,
+            password: hashedPassword
+        })
+
         console.log("🎉 Admin created successfully!");
 
         process.exit(0);
     }
 
-    catch (error){
+    catch (error) {
         console.log("Error creating admin:", error);
         process.exit(1);
 

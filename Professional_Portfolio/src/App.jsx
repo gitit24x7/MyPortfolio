@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         {/* CHAPTER 3: The Secret Entry (Admin Login) */}
         <Route path="/admin" element={<AdminLogin />} />
 
+        {/* CHAPTER 4: The Admin Dashboard (Hidden) */}
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );

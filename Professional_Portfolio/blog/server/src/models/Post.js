@@ -15,11 +15,16 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    excerpt: {
+        type: String,
+        required: true
+    },
     author: {
-        type: String
+        type: String,
+        default: 'Aditya Ojha'
     },
     tags: [String]
-});
+}, { timestamps: true });
 
 const Post = mongoose.model('Post', postSchema);
 

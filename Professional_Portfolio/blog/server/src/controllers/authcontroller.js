@@ -9,6 +9,7 @@ export const login = async (req, res) => {
 
         //handle if no details entered 
         const { username, password } = req.body;
+        console.log(`Login attempt received for user: [${username}]`);
         if (!username || !password) {
             return res.status(400).json({ message: "Please provide username and password" })
         }
