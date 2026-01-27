@@ -1,47 +1,30 @@
-/**
- * Main App Component
- * Combines all sections with the grid background
- */
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import GridBackground from './components/layout/GridBackground'
-import Nav from './components/layout/Nav'
-import Hero from './components/sections/Hero'
-import Projects from './components/sections/Projects'
-import CursorFollower from './components/ui/CursorFollower'
-
-import TechStack from './components/sections/TechStack'
-import FigmaDesigns from './components/sections/FigmaDesigns'
-import Experience from './components/sections/Experience'
-import About from './components/sections/About'
-// import CodeShowcase from './components/sections/CodeShowcase' - Removed as per request
-import Footer from './components/layout/Footer'
-import VisitorCounter from './components/ui/VisitorCounter'
-
-import SectionSeparator from './components/ui/SectionSeparator'
-import SmoothScroll from './components/utils/SmoothScroll'
+// 1. Importing the "Chapters" of our book
+import Home from './pages/Home';
+import Blog from './pages/Blog';
+import AdminLogin from './pages/AdminLogin';
 
 function App() {
   return (
-    <GridBackground>
-      <SmoothScroll />
-      <Nav />
-      <Hero />
-      <SectionSeparator />
-      <Projects />
-      <SectionSeparator />
-      <Experience />
-      <SectionSeparator />
-      <TechStack />
-      <SectionSeparator />
-      <FigmaDesigns />
-      <SectionSeparator />
-      <About />
-      <SectionSeparator />
-      <VisitorCounter />
-      <Footer />
-      <CursorFollower />
-    </GridBackground>
-  )
+    // 2. The Context Provider (Allows the app to use the Browser's History)
+    <Router>
+      {/* 3. The Switchboard (Only one child route will render at a time) */}
+      <Routes>
+
+        {/* CHAPTER 1: The Full Portfolio (Home) */}
+        <Route path="/" element={<Home />} />
+
+        {/* CHAPTER 2: The Blog Listing */}
+        <Route path="/blog" element={<Blog />} />
+
+        {/* CHAPTER 3: The Secret Entry (Admin Login) */}
+        <Route path="/admin" element={<AdminLogin />} />
+
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
