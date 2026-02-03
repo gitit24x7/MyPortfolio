@@ -28,7 +28,7 @@ const AdminDashboard = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setStatus('PUBLISHING');
+        setStatus('TRANSMITTING');
 
         try {
             const token = localStorage.getItem('token');
@@ -36,31 +36,46 @@ const AdminDashboard = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // THE KEY: Sending your ID card
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     ...formData,
-                    tags: formData.tags.split(',').map(tag => tag.trim()) // Cleanup tags
+                    tags: formData.tags.split(',').map(tag => tag.trim())
                 })
             });
 
             if (response.ok) {
                 setStatus('SUCCESS');
+                // EXTENDED WAIT: For that premium "System Logged" feel
                 setTimeout(() => {
                     navigate('/blog');
-                }, 1500);
+                }, 4000);
             } else {
-                setStatus('ERROR');
-                alert('Deployment failed. Check server logs.');
+                setStatus('READY');
+                const data = await response.json();
+                alert(`Sequence Aborted: ${data.message || 'Server Rejection'}`);
             }
         } catch (error) {
-            setStatus('ERROR');
-            console.error('Submission error:', error);
+            setStatus('READY');
+            alert('Link Failure: Target not reachable.');
         }
     };
 
     return (
         <GridBackground>
+            {/* SUCCESS OVERLAY */}
+            {status === 'SUCCESS' && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md transition-all duration-500">
+                    <div className="text-center font-mono">
+                        <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-emerald-500/50 animate-pulse">
+                            <span className="text-emerald-500 text-2xl">✓</span>
+                        </div>
+                        <h2 className="text-white text-xl font-bold tracking-[0.3em] uppercase mb-2">Transmission Successful</h2>
+                        <p className="text-emerald-500/60 text-xs tracking-tighter">Committing resource to public log...</p>
+                    </div>
+                </div>
+            )}
+
             <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
 
@@ -151,8 +166,8 @@ const AdminDashboard = () => {
                                 type="submit"
                                 disabled={status === 'PUBLISHING'}
                                 className={`px-10 py-4 rounded-full font-mono font-bold transition-all shadow-xl ${status === 'PUBLISHING'
-                                        ? 'bg-emerald-500/20 text-emerald-500'
-                                        : 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-emerald-500/20'
+                                    ? 'bg-emerald-500/20 text-emerald-500'
+                                    : 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-emerald-500/20'
                                     }`}
                             >
                                 {status === 'PUBLISHING' ? 'TRANSMITTING...' : 'DEPLOY LOG'}
