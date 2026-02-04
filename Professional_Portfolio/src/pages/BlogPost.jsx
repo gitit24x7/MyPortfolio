@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import GridBackground from '../components/layout/GridBackground';
 import Nav from '../components/layout/Nav';
 import Footer from '../components/layout/Footer';
+import NotFound from './NotFound';
 
 const BlogPost = () => {
     //we can use slug to fetch a blog a post since slugs are unique like id too
@@ -50,16 +51,9 @@ const BlogPost = () => {
     }, [slug]);  // ← Re-run if slug changes
 
     //conditionally rendering and showing the UI if we loading or error or post is not found, this is the UI part that we are covering
+    // If error (like 404 or failed fetch), show the NotFound page with the cool illustration
     if (error) {
-        return (
-            <div className="text-center text-red-500 font-mono py-12">
-                <p>Error: {error}</p>
-                console.log(error);
-                <Link to="/blog" className="text-emerald-500 hover:text-emerald-400 font-mono text-sm">
-                    ← Back to Blog
-                </Link>
-            </div>
-        )
+        return <NotFound />;
     }
 
     if (loading) {

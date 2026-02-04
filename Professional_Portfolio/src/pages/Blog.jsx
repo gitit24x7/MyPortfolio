@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import GridBackground from '../components/layout/GridBackground';
 import Nav from '../components/layout/Nav';
@@ -83,7 +84,7 @@ const Blog = () => {
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {posts.map((post) => (
-                                <div key={post._id} className="group relative bg-white/[0.02] border border-white/10 p-6 rounded-2xl hover:border-emerald-500/50 transition-all hover:bg-white/[0.04] cursor-pointer">
+                                <Link to={`/blog/${post.slug}`} key={post._id} className="group relative bg-white/[0.02] border border-white/10 p-6 rounded-2xl hover:border-emerald-500/50 transition-all hover:bg-white/[0.04] cursor-pointer block">
                                     <p className="text-emerald-500 font-mono text-[10px] mb-4 uppercase tracking-widest">
                                         {post.tags?.[0] || 'ENGINEERING_LOG'}
                                     </p>
@@ -99,7 +100,7 @@ const Blog = () => {
                                         </span>
                                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     )}

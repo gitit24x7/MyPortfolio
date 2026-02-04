@@ -499,9 +499,45 @@ const Hero = () => {
                 <div className="w-full border-b border-grid bg-slate-50/30 dark:bg-black/20 transition-colors duration-500">
                     <div className="max-w-5xl mx-auto border-x border-grid py-6 sm:py-12 px-4 sm:px-6 flex justify-center">
                         <p className="text-sm sm:text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl text-center font-light leading-relaxed transition-colors duration-500">
-                            Architecting digital ecosystems with precision and passion.
-                            Turning complex problems into elegant interfaces.
+                            I build systems that laugh at traffic spikes, not in SIX months but in SIX WEEKS
                         </p>
+                    </div>
+                </div>
+
+                {/* Row 2.5: CTA with Arrow */}
+                <div className="w-full border-b border-grid bg-slate-50/40 dark:bg-black/30 transition-colors duration-500">
+                    <div className="max-w-5xl mx-auto border-x border-grid py-6 sm:py-8 px-4 sm:px-6 flex flex-col items-center gap-4">
+                        <div className="relative">
+                            {/* Highlighter effect background */}
+                            <div className="absolute -inset-1 bg-gradient-to-r from-amber-300/0 via-amber-300/40 to-amber-300/0 dark:from-amber-600/0 dark:via-amber-600/20 dark:to-amber-600/0 blur-sm rounded-lg" />
+
+                            <p
+                                className="relative text-lg sm:text-2xl md:text-3xl text-slate-800 dark:text-slate-200 font-medium tracking-wide transition-colors duration-500 text-center"
+                                style={{ fontFamily: '"Playfair Display", serif' }}
+                            >
+                                If I have your attention, let's get in touch
+                            </p>
+                        </div>
+
+                        {/* Curved dashed arrow with loop - Extended */}
+                        <svg
+                            className="w-16 h-28 sm:w-20 sm:h-36 text-amber-500/80 dark:text-amber-400/80 rotate-[-5deg] drop-shadow-sm -mb-8 sm:-mb-10 relative z-20"
+                            viewBox="0 0 100 150"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            {/* Looped dashed path extended */}
+                            <path
+                                d="M 70,10 C 30,5 20,40 40,50 C 60,60 75,35 55,30 C 25,25 35,100 30,135"
+                                strokeDasharray="5,5"
+                                fill="none"
+                            />
+                            {/* Hand-drawn arrow head */}
+                            <path d="M 30,135 L 15,115 M 30,135 L 45,118" stroke="currentColor" strokeDasharray="none" />
+                        </svg>
                     </div>
                 </div>
 

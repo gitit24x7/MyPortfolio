@@ -10,6 +10,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Sun, Moon, Search, Command } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import SearchCommand from '../ui/SearchCommand'
 
 const Nav = () => {
@@ -170,7 +171,7 @@ const Nav = () => {
             <nav className="fixed top-0 left-0 right-0 z-50 border-b border-grid backdrop-blur-md bg-white/50 dark:bg-slate-950/50 transition-colors duration-500">
                 <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
                     {/* Logo/Name */}
-                    <div className="flex items-center gap-3">
+                    <Link to="/" className="flex items-center gap-3">
                         <div className="relative group overflow-hidden rounded shadow-sm hover:shadow-md transition-shadow duration-300">
                             <svg width="45" height="30" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" className="block">
                                 <rect width="90" height="60" fill="#FFFFFF" />
@@ -187,14 +188,15 @@ const Nav = () => {
                             {/* Shine effect */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                         </div>
-                    </div>
+                    </Link>
 
                     <div className="flex items-center gap-6">
                         {/* Navigation Links */}
                         <div className="hidden md:flex gap-8 text-sm font-medium">
-                            <a href="#work" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Work</a>
-                            <a href="#about" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">About</a>
-                            <a href="#blog" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Blog</a>
+                            <Link to="/" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Home</Link>
+                            <a href="/#work" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Work</a>
+                            <a href="/#about" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">About</a>
+                            <Link to="/blog" className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors">Blog</Link>
                             <a
                                 href="mailto:thisisadityaojha@gmail.com?subject=Let's%20Connect%20-%20From%20Your%20Portfolio&body=Hi%20Aditya,%0A%0AI%20found%20your%20portfolio%20and%20would%20love%20to%20connect!%0A%0A"
                                 className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors"

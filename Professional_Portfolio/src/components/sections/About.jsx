@@ -1,7 +1,10 @@
 import React from 'react';
 import { User, MapPin, Coffee, Code2 } from 'lucide-react';
+import { useCalEmbed } from '../../hooks/useCalEmbed';
 
 const About = () => {
+    useCalEmbed();
+
     return (
         <section id="about" className="relative z-10 transition-colors duration-500">
 
@@ -94,6 +97,30 @@ const About = () => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Row 3: Actions (CTA) */}
+            <div className="w-full border-b border-grid bg-slate-100/50 dark:bg-black/40 transition-colors duration-500">
+                <div className="max-w-5xl mx-auto border-x border-grid py-6 sm:py-12 px-4 sm:px-6 flex justify-center">
+                    <div className="flex gap-8">
+                        <div className="relative group">
+                            {/* Crosshairs */}
+                            <div className="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-slate-900/20 dark:border-white/20 transition-colors" />
+                            <div className="absolute -top-1 -right-1 w-2 h-2 border-t border-r border-slate-900/20 dark:border-white/20 transition-colors" />
+                            <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b border-l border-slate-900/20 dark:border-white/20 transition-colors" />
+                            <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-slate-900/20 dark:border-white/20 transition-colors" />
+
+                            <button
+                                data-cal-namespace="30min"
+                                data-cal-link="aditya-ojha-hvjfie/30min"
+                                data-cal-config='{"layout":"month_view"}'
+                                className="block px-6 py-2 sm:px-8 sm:py-4 bg-transparent border border-amber-500/50 dark:border-amber-400/50 text-sm sm:text-base text-slate-900 dark:text-slate-200 font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-all duration-300 shadow-[0_0_15px_rgba(251,191,36,0.1)] hover:shadow-[0_0_25px_rgba(251,191,36,0.4)] hover:border-amber-500"
+                            >
+                                Get in Touch
+                            </button>
                         </div>
                     </div>
                 </div>
