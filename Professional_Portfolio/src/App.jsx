@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import BlogPost from './pages/BlogPost';
 // 1. Importing the "Chapters" of our book
 import Home from './pages/Home';
@@ -32,6 +33,7 @@ function App() {
         {/* Catch-all route for 404s */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Analytics />
     </Router>
   );
 }
