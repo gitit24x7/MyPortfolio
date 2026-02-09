@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 
 const AdminLogin = () => {
     const [username, setUsername] = useState('');
@@ -51,6 +52,7 @@ const AdminLogin = () => {
 
     return (
         <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+            <SEO title="System Access | Admin" />
             <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl shadow-2xl w-full max-w-md">
                 <h1 className="text-2xl font-bold text-white mb-6 text-center font-mono tracking-tight">
                     SYSTEM ACCESS

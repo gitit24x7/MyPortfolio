@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GridBackground from '../components/layout/GridBackground';
+import SEO from '../components/common/SEO';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -127,6 +128,7 @@ const AdminDashboard = () => {
 
     return (
         <GridBackground>
+            <SEO title="Admin Dashboard | Command Center" />
             {/* SUCCESS OVERLAY */}
             {status === 'SUCCESS' && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md transition-all duration-500">

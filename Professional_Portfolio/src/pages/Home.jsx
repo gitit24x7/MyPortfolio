@@ -9,6 +9,7 @@ import Nav from '../components/layout/Nav';
 import Hero from '../components/sections/Hero';
 import Projects from '../components/sections/Projects';
 import CursorFollower from '../components/ui/CursorFollower';
+import SEO from '../components/common/SEO';
 
 import TechStack from '../components/sections/TechStack';
 import FigmaDesigns from '../components/sections/FigmaDesigns';
@@ -23,6 +24,10 @@ import SmoothScroll from '../components/utils/SmoothScroll';
 const Home = () => {
     return (
         <GridBackground>
+            <SEO
+                title="Aditya Ojha | Full Stack Developer"
+                description="Professional portfolio of Aditya Ojha. Building scalable web applications with React, Node.js, and modern web technologies."
+            />
             <SmoothScroll />
             <Nav />
             <Hero />

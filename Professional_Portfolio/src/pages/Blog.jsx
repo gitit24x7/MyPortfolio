@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import GridBackground from '../components/layout/GridBackground';
 import Nav from '../components/layout/Nav';
 import Footer from '../components/layout/Footer';
+import SEO from '../components/common/SEO';
 
 const Blog = () => {
     const [posts, setPosts] = useState([]);
@@ -28,6 +29,10 @@ const Blog = () => {
 
     return (
         <GridBackground>
+            <SEO
+                title="Engineering Logs | Aditya Ojha"
+                description="Technical journal, architectural decisions, and performance experiments."
+            />
             <Nav />
 
             <main className="relative pt-32 pb-20 px-6 overflow-hidden">

@@ -4,10 +4,12 @@ import { motion } from 'framer-motion';
 import GridBackground from '../components/layout/GridBackground';
 import Nav from '../components/layout/Nav';
 import Footer from '../components/layout/Footer';
+import SEO from '../components/common/SEO';
 
 const NotFound = () => {
     return (
         <GridBackground>
+            <SEO title="404: Signal Lost" />
             <Nav />
             <main className="min-h-screen flex items-center justify-center relative z-10 px-6 pt-20">
                 <div className="text-center">

@@ -4,6 +4,7 @@ import GridBackground from '../components/layout/GridBackground';
 import Nav from '../components/layout/Nav';
 import Footer from '../components/layout/Footer';
 import NotFound from './NotFound';
+import SEO from '../components/common/SEO';
 
 const BlogPost = () => {
     //we can use slug to fetch a blog a post since slugs are unique like id too
@@ -67,6 +68,11 @@ const BlogPost = () => {
     // If we got here, we have the post! Show it.
     return (
         <GridBackground>
+            <SEO
+                title={post.title}
+                description={post.excerpt}
+                type="article"
+            />
             <Nav />
 
             <main className="pt-32 pb-20 px-6 max-w-4xl mx-auto">
