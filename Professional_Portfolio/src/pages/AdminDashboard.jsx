@@ -13,6 +13,11 @@ const AdminDashboard = () => {
         tags: ''
     });
 
+    // State for managing posts
+    const [posts, setPosts] = useState([]);
+    const [editingPost, setEditingPost] = useState(null);
+
+
     // 1. Security Check: If no token, kick back to login
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -26,14 +31,37 @@ const AdminDashboard = () => {
         navigate('/admin');
     };
 
+    // NEW: Handle Edit Click
+    const handleEdit = (post) => {
+        setEditingPost(post);
+        setFormData({
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt,
+            content: post.content,
+            tags: post.tags.join(', ')
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('TRANSMITTING');
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:3001/api/posts', {
-                method: 'POST',
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
+            // 1. Determine URL and Method (Create vs Update)
+            const url = editingPost
+                ? `${API_URL}/api/posts/${editingPost._id}`
+                : `${API_URL}/api/posts`;
+
+            const method = editingPost ? 'PUT' : 'POST';
+
+            // 2. Send the Request
+            const response = await fetch(url, {
+                method: method,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -46,7 +74,17 @@ const AdminDashboard = () => {
 
             if (response.ok) {
                 setStatus('SUCCESS');
-                // EXTENDED WAIT: For that premium "System Logged" feel
+
+                // 3. Clear "Editing" mode after success
+                if (editingPost) {
+                    setEditingPost(null);
+                    // Update the local list immediately
+                    if (method === 'PUT') {
+                        window.location.reload();
+                        return;
+                    }
+                }
+
                 setTimeout(() => {
                     navigate('/blog');
                 }, 4000);
@@ -58,6 +96,32 @@ const AdminDashboard = () => {
         } catch (error) {
             setStatus('READY');
             alert('Link Failure: Target not reachable.');
+        }
+    };
+
+    const handleDelete = async (postId) => {
+        if (!confirm('Are you sure you want to delete this log? NO UNDO.')) return;
+
+        const token = localStorage.getItem('token');
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
+        try {
+            const response = await fetch(`${API_URL}/api/posts/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                setPosts(posts.filter(post => post._id !== postId));
+                alert('Log deleted successfully.');
+            } else {
+                alert('Delete failed.');
+            }
+        } catch (error) {
+            console.error('Delete error:', error);
+            alert('Delete failed.');
         }
     };
 
@@ -170,10 +234,50 @@ const AdminDashboard = () => {
                                     : 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-emerald-500/20'
                                     }`}
                             >
-                                {status === 'PUBLISHING' ? 'TRANSMITTING...' : 'DEPLOY LOG'}
+
+                                {status === 'PUBLISHING' ? 'TRANSMITTING...' : (editingPost ? 'UPDATE LOG' : 'DEPLOY LOG')}
                             </button>
                         </div>
                     </form>
+
+                    {/* NEW: Logs Management Section */}
+                    <div className="mt-16 border-t border-white/10 pt-12">
+                        <h2 className="text-white font-mono text-lg mb-6 tracking-widest">EXISTING LOGS</h2>
+
+                        <div className="space-y-4">
+                            {posts.map(post => (
+                                <div key={post._id} className="flex items-center justify-between bg-white/5 border border-white/10 p-4 rounded-xl hover:border-emerald-500/30 transition-colors">
+                                    <div>
+                                        <h3 className="text-white font-medium font-mono">{post.title}</h3>
+                                        <p className="text-slate-500 text-xs font-mono mt-1">
+                                            {new Date(post.createdAt).toLocaleDateString()}
+                                        </p>
+                                    </div>
+
+                                    <div className="flex gap-3">
+                                        <button
+                                            onClick={() => handleEdit(post)}
+                                            className="text-emerald-500 hover:text-emerald-400 text-xs font-mono uppercase tracking-wider px-3 py-1 border border-emerald-500/20 rounded hover:bg-emerald-500/10 transition-colors"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(post._id)}
+                                            className="text-red-500 hover:text-red-400 text-xs font-mono uppercase tracking-wider px-3 py-1 border border-red-500/20 rounded hover:bg-red-500/10 transition-colors"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+
+                            {posts.length === 0 && (
+                                <div className="text-slate-500 text-center py-8 font-mono text-sm">
+                                    NO LOGS DETECTED. INITIALIZE NEW TRANSMISSION.
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </GridBackground>
