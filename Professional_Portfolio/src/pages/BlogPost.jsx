@@ -20,7 +20,8 @@ const BlogPost = () => {
         const fetchPost = async () => {
             try {
                 // Build the URL using the slug from useParams
-                const url = `http://localhost:3001/api/posts/${slug}`;
+                const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+                const url = `${API_URL}/api/posts/${slug}`;
 
                 const response = await fetch(url);
 

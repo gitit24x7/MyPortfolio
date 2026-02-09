@@ -328,22 +328,22 @@ const connectDB = async () => {
 // ----------------------------------------------------------------------------
 
 // Connect to DB first, then start server
-connectDB().then(() => {
+// ----------------------------------------------------------------------------
+// STEP 7: Start the Server (Modified for Vercel)
+// ----------------------------------------------------------------------------
+
+// Connect to DB
+connectDB();
+
+// For Local Dev: Listen on port
+if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
-        console.log(`
-╔════════════════════════════════════════════════════════════╗
-║                                                            ║
-║   🚀 Blog API Server is running!                           ║
-║                                                            ║
-║   → Local:   http://localhost:${PORT}                      ║
-║   → Health:  http://localhost:${PORT}/health               ║
-║                                                            ║
-║   Press Ctrl+C to stop the server.                         ║
-║                                                            ║
-╚════════════════════════════════════════════════════════════╝
-    `);
+        console.log(`Server running on port ${PORT}`);
     });
-});
+}
+
+// For Vercel: Export the app
+export default app;
 
 // What does `app.listen(PORT, callback)` do?
 //
