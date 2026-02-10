@@ -5,15 +5,16 @@
 <h1 align="center">Aditya Ojha — Developer Portfolio</h1>
 
 <p align="center">
-  <strong>A premium, grid-based portfolio built with React 19 and modern web technologies</strong>
+  <strong>A premium, full-stack portfolio with an integrated blog system — built with React 19, Express, and MongoDB</strong>
 </p>
 
 <p align="center">
-  <a href="https://adityaojha.vercel.app" target="_blank" rel="noopener noreferrer" >🌐 Live Site</a> •
+  <a href="https://adityaojha.dev" target="_blank" rel="noopener noreferrer">🌐 Live Site</a> •
   <a href="#features">✨ Features</a> •
   <a href="#tech-stack">🛠 Tech Stack</a> •
   <a href="#architecture">📐 Architecture</a> •
-  <a href="#getting-started">🚀 Getting Started</a>
+  <a href="#getting-started">🚀 Getting Started</a> •
+  <a href="#deployment">☁️ Deployment</a>
 </p>
 
 ---
@@ -53,7 +54,7 @@ A beautiful, instant theme switch with a liquid drop animation that expands from
 - **Command Palette** — Spotlight-style search with `Cmd+K` / `Ctrl+K`
 - **Gradient Switcher** — Switchable hero gradients (Deep Space, Obsidian Luster, Aurora Borealis)
 
-### 📊 Sections
+### 📊 Portfolio Sections
 
 | Section | Description |
 |---------|-------------|
@@ -62,43 +63,53 @@ A beautiful, instant theme switch with a liquid drop animation that expands from
 | **Experience** | Timeline-style professional experience display |
 | **Technical Arsenal** | 4×4 grid of technologies with shimmer hover effects |
 | **Figma Designs** | Gallery of design work with "pop" hover animations |
-| **About** | Personal introduction with location and background |
+| **About** | Personal introduction with CTA button |
 | **Visitor Counter** | Real-time visitor tracking with animated display |
 
-### 🔍 Search & Navigation
-- **Command Palette** — Quick navigation to any section
-- **Fixed Navigation** — Backdrop-blur navbar with India flag logo
-- **Anchor Links** — Smooth scroll to Work, About, Blog, Contact
+### 📝 Blog System (Full Stack)
+- **Blog Feed** (`/blog`) — Grid of posts fetched from the API
+- **Single Post** (`/blog/:slug`) — Dynamic post pages with full content
+- **Admin Login** (`/admin`) — Secured admin authentication with JWT
+- **Admin Dashboard** (`/admin/dashboard`) — Create, Edit, and Delete posts
+- **404 Page** — Custom animated "Signal Lost" page for missing routes
+
+### 🔍 SEO & Optimization
+- **React Helmet** — Dynamic `<title>` and `<meta>` tags per page
+- **Open Graph / Twitter Cards** — Rich social sharing previews
+- **Sitemap & Robots.txt** — Search engine indexing support
+- **Vercel Analytics** — Built-in traffic tracking
 
 ---
 
 ## 🛠 Tech Stack
 
-### Core Framework
+### Frontend
 ```
-React 19.2.0          — UI Library with latest features
-Vite 7.2.4            — Lightning-fast build tool
-Tailwind CSS 4.1.18   — Utility-first styling (v4 with @theme)
-```
-
-### Animation & Interaction
-```
-Framer Motion 12.x    — Production-ready motion library
-Lenis 1.3.17          — Smooth scroll engine
-```
-
-### UI Components
-```
-Lucide React          — Beautiful, consistent icons
-@tremor/react         — Dashboard components
-clsx + tailwind-merge — Conditional class utilities
+React 19.2.0            — UI Library
+React Router DOM 7.x    — Client-side routing
+Vite 6.0.0              — Build tool
+Tailwind CSS 4.0.0      — Utility-first styling (v4 with @theme)
+Framer Motion 12.x      — Animation library
+Lenis 1.3.17            — Smooth scroll engine
+react-helmet-async      — Dynamic SEO meta tags
+Lucide React            — Icon library
+clsx + tailwind-merge   — Conditional class utilities
+@vercel/analytics       — Traffic analytics
 ```
 
-### Development
+### Backend
 ```
-ESLint 9.x            — Code quality enforcement
-PostCSS + Autoprefixer — CSS processing
-TypeScript Types      — Enhanced IDE support
+Express 5.x             — Node.js web framework
+Mongoose 9.x            — MongoDB ODM
+bcryptjs                — Password hashing
+jsonwebtoken (JWT)      — Authentication tokens
+cors                    — Cross-origin resource sharing
+dotenv                  — Environment variable management
+```
+
+### Database
+```
+MongoDB Atlas            — Cloud-hosted NoSQL database
 ```
 
 ---
@@ -106,79 +117,65 @@ TypeScript Types      — Enhanced IDE support
 ## 📐 Architecture
 
 ```
-src/
-├── App.jsx                    # Root component & section composition
-├── main.jsx                   # React DOM entry point
-├── index.css                  # Global styles, CSS variables, Tailwind config
-│
-├── components/
-│   ├── layout/
-│   │   ├── Nav.jsx            # Navigation with theme toggle & search
-│   │   ├── GridBackground.jsx # Full-page grid overlay
-│   │   └── Footer.jsx         # Site footer with links
+Professional_Portfolio/
+├── src/                           # Frontend Source
+│   ├── App.jsx                    # Root component & routing
+│   ├── main.jsx                   # Entry point (HelmetProvider)
+│   ├── index.css                  # Global styles & Tailwind config
 │   │
-│   ├── sections/
-│   │   ├── Hero.jsx           # Hero with gradient switcher
-│   │   ├── Projects.jsx       # Bento grid project showcase
-│   │   ├── Experience.jsx     # Professional timeline
-│   │   ├── TechStack.jsx      # Technology grid
-│   │   ├── FigmaDesigns.jsx   # Design portfolio
-│   │   ├── About.jsx          # Personal introduction
-│   │   └── CodeShowcase.jsx   # Code snippet display
+│   ├── components/
+│   │   ├── common/
+│   │   │   └── SEO.jsx            # Reusable SEO meta tag component
+│   │   ├── layout/
+│   │   │   ├── Nav.jsx            # Navigation with theme toggle & search
+│   │   │   ├── GridBackground.jsx # Full-page grid overlay
+│   │   │   └── Footer.jsx         # Site footer with links
+│   │   ├── sections/
+│   │   │   ├── Hero.jsx           # Hero with gradient switcher
+│   │   │   ├── Projects.jsx       # Bento grid project showcase
+│   │   │   ├── Experience.jsx     # Professional timeline
+│   │   │   ├── TechStack.jsx      # Technology grid
+│   │   │   ├── FigmaDesigns.jsx   # Design portfolio
+│   │   │   ├── About.jsx          # Personal introduction
+│   │   │   └── CodeShowcase.jsx   # Code snippet display
+│   │   ├── ui/
+│   │   │   ├── CursorFollower.jsx # Custom cursor component
+│   │   │   ├── SearchCommand.jsx  # Command palette modal
+│   │   │   ├── VisitorCounter.jsx # Analytics display
+│   │   │   ├── SectionSeparator.jsx
+│   │   │   └── CodeBlock.jsx      # Syntax-highlighted code blocks
+│   │   └── utils/
+│   │       └── SmoothScroll.jsx   # Lenis scroll wrapper
 │   │
-│   ├── ui/
-│   │   ├── CursorFollower.jsx # Custom cursor component
-│   │   ├── SearchCommand.jsx  # Command palette modal
-│   │   ├── VisitorCounter.jsx # Analytics display
-│   │   ├── SectionSeparator.jsx
-│   │   └── CodeBlock.jsx
+│   ├── pages/
+│   │   ├── Home.jsx               # Main portfolio page
+│   │   ├── Blog.jsx               # Blog feed (fetches from API)
+│   │   ├── BlogPost.jsx           # Single post page (dynamic)
+│   │   ├── AdminLogin.jsx         # Admin authentication
+│   │   ├── AdminDashboard.jsx     # Post management (CRUD)
+│   │   └── NotFound.jsx           # 404 page with animation
 │   │
+│   ├── hooks/
+│   │   └── useCalEmbed.js         # Cal.com scheduling integration
 │   └── utils/
-│       └── SmoothScroll.jsx   # Lenis scroll wrapper
+│       └── cn.js                  # clsx + tailwind-merge utility
 │
-├── hooks/
-│   └── useCalEmbed.js         # Cal.com scheduling integration
+├── blog/server/                   # Backend API
+│   ├── src/
+│   │   ├── server.js              # Express app entry point
+│   │   ├── controllers/           # Route handlers
+│   │   ├── models/                # Mongoose schemas (Post, Admin)
+│   │   ├── routes/                # API route definitions
+│   │   └── middleware/            # Auth middleware (JWT)
+│   ├── vercel.json                # Vercel serverless config
+│   └── package.json
 │
-├── utils/
-│   └── cn.js                  # clsx + tailwind-merge utility
+├── public/                        # Static assets
+│   ├── tech/                      # Technology icons
+│   ├── robots.txt                 # Search engine rules
+│   └── sitemap.xml                # SEO sitemap
 │
-└── docs/                      # Architecture documentation
-    ├── ARCHITECTURAL_GUIDE.md
-    ├── CODE_WALKTHROUGH.md
-    └── HERO_DEEP_DIVE.md
-```
-
-### Key Design Patterns
-
-#### 1. Centralized Grid Border System
-All grid borders use a single `border-grid` utility class controlled by CSS variables:
-```css
-:root {
-  --grid-border-light: var(--color-slate-300);
-  --grid-border-dark: rgba(255, 255, 255, 0.20);
-}
-```
-
-#### 2. Section Composition
-Each section follows a consistent structure:
-```jsx
-<section className="relative z-10">
-  {/* Row 1: Header badges */}
-  <div className="w-full border-b border-grid">
-    <div className="max-w-5xl mx-auto border-x border-grid">
-      {/* Content */}
-    </div>
-  </div>
-  {/* Row 2: Title */}
-  {/* Row 3: Content grid */}
-</section>
-```
-
-#### 3. Dark Mode Strategy
-Uses Tailwind v4's class-based dark mode with manual DOM manipulation:
-```jsx
-document.documentElement.classList.add('dark')  // Enable
-document.documentElement.classList.remove('dark') // Disable
+└── vercel.json                    # Frontend SPA routing config
 ```
 
 ---
@@ -187,51 +184,85 @@ document.documentElement.classList.remove('dark') // Disable
 
 ### Prerequisites
 - Node.js 18+
-- npm or pnpm
+- npm
+- MongoDB Atlas account (for the blog backend)
 
-### Installation
+### Frontend Setup
 
 ```bash
 # Clone the repository
 git clone https://github.com/gitit24x7/MyPortfolio.git
 
-# Navigate to project
+# Navigate to frontend
 cd Professional_Portfolio
 
 # Install dependencies
 npm install
 
+# Create .env file
+echo "VITE_API_URL=http://localhost:3001" > .env
+
 # Start development server
+npm run dev
+```
+
+### Backend Setup
+
+```bash
+# Navigate to backend
+cd Professional_Portfolio/blog/server
+
+# Install dependencies
+npm install
+
+# Create .env file with your credentials
+# DATABASE_URL=mongodb+srv://your-connection-string
+# JWT_SECRET=your-secret-key
+
+# Start backend server
 npm run dev
 ```
 
 ### Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start Vite dev server with HMR |
-| `npm run build` | Production build to `dist/` |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint checks |
+| Command | Location | Description |
+|---------|----------|-------------|
+| `npm run dev` | Frontend | Start Vite dev server with HMR |
+| `npm run build` | Frontend | Production build to `dist/` |
+| `npm run preview` | Frontend | Preview production build locally |
+| `npm run dev` | Backend | Start Express server with watch mode |
+| `npm start` | Backend | Start Express server (production) |
 
 ---
 
-## 📁 Project Structure Details
+## ☁️ Deployment
 
-### Public Assets
-```
-public/
-├── tech/             # Technology icons (React, Next.js, etc.)
-├── figma/            # Figma design screenshots
-└── Profile_pic.png   # Profile image
-```
+This project is a **Monorepo** — both Frontend and Backend live in one repository.
+Deploy **both** to Vercel for free.
 
-### Environment Variables
-```env
-# .env (if using visitor counter backend)
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_anon_key
-```
+### 1. Deploy Frontend (Vercel)
+1.  Push code to GitHub.
+2.  Import repository to [Vercel](https://vercel.com).
+3.  **Root Directory:** `Professional_Portfolio`
+4.  **Build Command:** `npm run build`
+5.  **Output Directory:** `dist`
+6.  **Environment Variables:**
+    *   `VITE_API_URL` → Your Backend URL (from Step 2)
+
+### 2. Deploy Backend (Vercel)
+1.  Import the **same** repository to Vercel as a **new project**.
+2.  **Project Name:** `my-portfolio-backend`
+3.  **Root Directory:** `Professional_Portfolio/blog/server`
+4.  **Framework Preset:** `Other`
+5.  **Environment Variables:**
+    *   `DATABASE_URL` → Your MongoDB Atlas connection string
+    *   `JWT_SECRET` → A random secret string
+6.  Click **Deploy** and copy the domain.
+
+### 3. Connect Them
+1.  Go to your **Frontend** project on Vercel → Settings → Environment Variables.
+2.  Set `VITE_API_URL` to your Backend URL (e.g., `https://my-backend.vercel.app`).
+3.  **Redeploy** the Frontend.
 
 ---
 
@@ -257,12 +288,6 @@ Update the `projects` array in `Projects.jsx`:
     liveUrl: "https://...",
     githubUrl: "https://github.com/..."
 }
-```
-
-### Modifying Grid Borders
-Change the opacity/color in `index.css`:
-```css
---grid-border-dark: rgba(255, 255, 255, 0.15); /* Adjust opacity */
 ```
 
 ---
