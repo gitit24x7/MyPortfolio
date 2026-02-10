@@ -76,40 +76,42 @@ const BlogPost = () => {
             />
             <Nav />
 
-            <main className="pt-32 pb-20 px-6 max-w-4xl mx-auto">
-                {/* Back Link */}
-                <Link to="/blog" className="text-emerald-500 hover:text-emerald-400 font-mono text-sm mb-8 inline-block transition-colors">
-                    ← BACK_TO_LOG
-                </Link>
+            <main className="pt-14 pb-20">
+                <div className="max-w-5xl mx-auto border-x border-grid px-6 md:px-12">
+                    {/* Back Link */}
+                    <Link to="/blog" className="text-emerald-500 hover:text-emerald-400 font-mono text-sm mb-8 inline-block transition-colors">
+                        ← BACK_TO_LOG
+                    </Link>
 
-                {/* Article Container */}
-                <article>
-                    {/* Post Metadata - Tag */}
-                    <p className="text-emerald-500 font-mono text-xs uppercase tracking-widest mb-4">
-                        {post.tags?.[0] || 'ENGINEERING_LOG'}
-                    </p>
+                    {/* Article Container */}
+                    <article>
+                        {/* Post Metadata - Tag */}
+                        <p className="text-emerald-500 font-mono text-xs uppercase tracking-widest mb-4">
+                            {post.tags?.[0] || 'ENGINEERING_LOG'}
+                        </p>
 
-                    {/* Post Title */}
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                        {post.title}
-                    </h1>
+                        {/* Post Title */}
+                        <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                            {post.title}
+                        </h1>
 
-                    {/* Post Date */}
-                    <p className="text-slate-500 font-mono text-sm mb-12">
-                        {new Date(post.createdAt).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                        })}
-                    </p>
+                        {/* Post Date */}
+                        <p className="text-slate-500 font-mono text-sm mb-12">
+                            {new Date(post.createdAt).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })}
+                        </p>
 
-                    {/* Post Content */}
-                    <div className="prose prose-invert prose-emerald max-w-none">
-                        <div className="text-slate-300 leading-relaxed whitespace-pre-wrap">
-                            {post.content}
+                        {/* Post Content */}
+                        <div className="prose prose-invert prose-emerald max-w-none">
+                            <div className="text-slate-300 leading-relaxed whitespace-pre-wrap">
+                                {post.content}
+                            </div>
                         </div>
-                    </div>
-                </article>
+                    </article>
+                </div>
             </main>
 
             <Footer />

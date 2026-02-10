@@ -8,7 +8,7 @@ import GridBackground from '../components/layout/GridBackground';
 import Nav from '../components/layout/Nav';
 import Hero from '../components/sections/Hero';
 import Projects from '../components/sections/Projects';
-import CursorFollower from '../components/ui/CursorFollower';
+
 import SEO from '../components/common/SEO';
 
 import TechStack from '../components/sections/TechStack';
@@ -44,7 +44,6 @@ const Home = () => {
             <SectionSeparator />
             <VisitorCounter />
             <Footer />
-            <CursorFollower />
         </GridBackground>
     );
 };

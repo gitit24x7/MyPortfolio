@@ -11,7 +11,7 @@
 const GridBackground = ({ children }) => {
     return (
         // Added dark:bg-black for pitch black theme
-        <div className="relative min-h-screen bg-slate-50 dark:bg-black transition-colors duration-500 overflow-x-hidden">
+        <div className="relative min-h-screen w-full bg-slate-50 dark:bg-black transition-colors duration-500 flex justify-center">
 
             {/* 1. Global Noise Texture (Visible in both modes) */}
             {/* Increased opacity for better visibility as requested */}
@@ -30,8 +30,8 @@ const GridBackground = ({ children }) => {
 
             {/* 4. Decorative Hatched Side Columns - Removed as per user request */}
 
-            {/* Content Wrapper */}
-            <div className="relative z-10 transition-colors">
+            {/* Content Wrapper - Centered via flexbox */}
+            <div className="relative z-10 w-full max-w-full transition-colors">
                 {children}
             </div>
         </div>

@@ -4,6 +4,7 @@ import GridBackground from '../components/layout/GridBackground';
 import Nav from '../components/layout/Nav';
 import Footer from '../components/layout/Footer';
 import SEO from '../components/common/SEO';
+import SideDecorations from '../components/ui/SideDecorations';
 
 const Blog = () => {
     const [posts, setPosts] = useState([]);
@@ -74,9 +75,10 @@ const Blog = () => {
                 title="Engineering Logs | Aditya Ojha"
                 description="Technical journal, architectural decisions, and performance experiments."
             />
+            <SideDecorations />
             <Nav />
 
-            <section className="relative z-10 pt-24 transition-colors duration-500">
+            <section className="relative z-10 pt-6 transition-colors duration-500">
 
                 {/* Row 1: Header Badges */}
                 <div className="w-full border-b border-grid relative overflow-hidden">
@@ -151,8 +153,8 @@ const Blog = () => {
                                             key={tag}
                                             onClick={() => setActiveTag(tag)}
                                             className={`px-4 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider transition-all ${activeTag === tag
-                                                    ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/50'
-                                                    : 'bg-white dark:bg-white/[0.03] text-slate-500 dark:text-slate-500 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 hover:text-slate-700 dark:hover:text-slate-300'
+                                                ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/50'
+                                                : 'bg-white dark:bg-white/[0.03] text-slate-500 dark:text-slate-500 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 hover:text-slate-700 dark:hover:text-slate-300'
                                                 }`}
                                         >
                                             {tag}

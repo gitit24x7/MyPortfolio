@@ -307,7 +307,7 @@ const Hero = () => {
     const PROFILE_IMG_URL = "/tech/Profile_pic.webp";
 
     return (
-        <section className="pt-24 sm:pt-32 pb-0 flex flex-col relative z-10 transition-colors duration-500">
+        <section className="pt-6 sm:pt-14 pb-0 flex flex-col relative z-10 transition-colors duration-500">
 
             <div>
                 {/* Unified background for profile rows */}
@@ -521,22 +521,22 @@ const Hero = () => {
 
                         {/* Curved dashed arrow with loop - Extended */}
                         <svg
-                            className="w-16 h-28 sm:w-20 sm:h-36 text-amber-500/80 dark:text-amber-400/80 rotate-[-5deg] drop-shadow-sm -mb-8 sm:-mb-10 relative z-20"
-                            viewBox="0 0 100 150"
+                            className="w-16 h-20 sm:w-20 sm:h-28 text-amber-500/80 dark:text-amber-400/80 rotate-[-5deg] drop-shadow-sm -mb-6 sm:-mb-8 relative z-20"
+                            viewBox="0 0 100 110"
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="2.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                         >
-                            {/* Looped dashed path extended */}
+                            {/* Looped dashed path - Shortened */}
                             <path
-                                d="M 70,10 C 30,5 20,40 40,50 C 60,60 75,35 55,30 C 25,25 35,100 30,135"
+                                d="M 70,10 C 30,5 20,40 40,50 C 60,60 75,35 55,30 C 25,25 35,65 30,95"
                                 strokeDasharray="5,5"
                                 fill="none"
                             />
-                            {/* Hand-drawn arrow head */}
-                            <path d="M 30,135 L 15,115 M 30,135 L 45,118" stroke="currentColor" strokeDasharray="none" />
+                            {/* Hand-drawn arrow head - Moved up */}
+                            <path d="M 30,95 L 15,78 M 30,95 L 45,80" stroke="currentColor" strokeDasharray="none" />
                         </svg>
                     </div>
                 </div>
