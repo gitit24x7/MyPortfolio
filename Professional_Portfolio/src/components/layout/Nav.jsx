@@ -8,7 +8,7 @@
  * - Blog Link
  */
 import { useState, useEffect, useRef } from 'react'
-import { Sun, Moon, Search, Command } from 'lucide-react'
+import { Sun, Moon, Search, Command, Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import SearchCommand from '../ui/SearchCommand'
@@ -18,6 +18,7 @@ const Nav = () => {
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [isAnimating, setIsAnimating] = useState(false)
     const [dropOrigin, setDropOrigin] = useState({ x: 0, y: 0 })
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const toggleRef = useRef(null)
 
     // Handle Theme Toggle with drop animation
@@ -306,9 +307,155 @@ const Nav = () => {
                                 }}
                             />
                         </motion.button>
+
+                        {/* Mobile Hamburger Menu Icon */}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(true)}
+                            className="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                            aria-label="Open menu"
+                        >
+                            <Menu className="w-6 h-6 text-slate-700 dark:text-slate-300" />
+                        </button>
                     </div>
                 </div>
             </nav>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] md:hidden"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        />
+
+                        {/* Menu Panel */}
+                        <motion.div
+                            className="fixed right-0 top-0 bottom-0 w-[280px] bg-white dark:bg-slate-900 z-[70] shadow-2xl md:hidden overflow-y-auto"
+                            initial={{ x: '100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '100%' }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                        >
+                            {/* Menu Header */}
+                            <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-white/10">
+                                <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Menu</h2>
+                                <button
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                                    aria-label="Close menu"
+                                >
+                                    <X className="w-6 h-6 text-slate-700 dark:text-slate-300" />
+                                </button>
+                            </div>
+
+                            {/* Menu Items */}
+                            <nav className="p-6">
+                                <motion.div
+                                    className="flex flex-col gap-2"
+                                    initial="closed"
+                                    animate="open"
+                                    exit="closed"
+                                    variants={{
+                                        open: {
+                                            transition: {
+                                                staggerChildren: 0.07,
+                                                delayChildren: 0.1
+                                            }
+                                        },
+                                        closed: {
+                                            transition: {
+                                                staggerChildren: 0.05,
+                                                staggerDirection: -1
+                                            }
+                                        }
+                                    }}
+                                >
+                                    <motion.div
+                                        variants={{
+                                            open: { opacity: 1, x: 0 },
+                                            closed: { opacity: 0, x: 20 }
+                                        }}
+                                    >
+                                        <Link
+                                            to="/"
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 font-medium transition-colors"
+                                        >
+                                            Home
+                                        </Link>
+                                    </motion.div>
+
+                                    <motion.div
+                                        variants={{
+                                            open: { opacity: 1, x: 0 },
+                                            closed: { opacity: 0, x: 20 }
+                                        }}
+                                    >
+                                        <a
+                                            href="/#work"
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 font-medium transition-colors"
+                                        >
+                                            Work
+                                        </a>
+                                    </motion.div>
+
+                                    <motion.div
+                                        variants={{
+                                            open: { opacity: 1, x: 0 },
+                                            closed: { opacity: 0, x: 20 }
+                                        }}
+                                    >
+                                        <a
+                                            href="/#about"
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 font-medium transition-colors"
+                                        >
+                                            About
+                                        </a>
+                                    </motion.div>
+
+                                    <motion.div
+                                        variants={{
+                                            open: { opacity: 1, x: 0 },
+                                            closed: { opacity: 0, x: 20 }
+                                        }}
+                                    >
+                                        <Link
+                                            to="/blog"
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 font-medium transition-colors"
+                                        >
+                                            Blog
+                                        </Link>
+                                    </motion.div>
+
+                                    <motion.div
+                                        variants={{
+                                            open: { opacity: 1, x: 0 },
+                                            closed: { opacity: 0, x: 20 }
+                                        }}
+                                    >
+                                        <a
+                                            href="mailto:thisisadityaojha@gmail.com?subject=Let's%20Connect%20-%20From%20Your%20Portfolio&body=Hi%20Aditya,%0A%0AI%20found%20your%20portfolio%20and%20would%20love%20to%20connect!%0A%0A"
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="block px-4 py-3 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 font-medium transition-colors"
+                                        >
+                                            Contact
+                                        </a>
+                                    </motion.div>
+                                </motion.div>
+                            </nav>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
 
             <SearchCommand isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
         </>
