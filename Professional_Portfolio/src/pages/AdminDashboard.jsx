@@ -17,6 +17,33 @@ const AdminDashboard = () => {
     // State for managing posts
     const [posts, setPosts] = useState([]);
     const [editingPost, setEditingPost] = useState(null);
+    const [fetchError, setFetchError] = useState(null);
+
+    // Initial Fetch of Posts
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+                console.log('Fetching posts from:', API_URL); // Debug log
+                const response = await fetch(`${API_URL}/api/posts`);
+                const data = await response.json();
+                console.log('API Response:', data); // Debug log
+
+                if (data.success) {
+                    setPosts(data.data || []);
+                    console.log('Posts set to state:', data.data); // Debug log
+                } else {
+                    console.error('API returned success: false', data); // Debug log
+                    setFetchError('API Error: ' + (data.message || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                setFetchError('Network Error: ' + error.message);
+            }
+        };
+
+        fetchPosts();
+    }, []);
 
 
     // 1. Security Check: If no token, kick back to login
@@ -245,6 +272,12 @@ const AdminDashboard = () => {
                     {/* NEW: Logs Management Section */}
                     <div className="mt-16 border-t border-white/10 pt-12">
                         <h2 className="text-white font-mono text-lg mb-6 tracking-widest">EXISTING LOGS</h2>
+
+                        {fetchError && (
+                            <div className="mb-6 p-4 border border-red-500/50 bg-red-500/10 rounded-lg text-red-500 font-mono text-sm">
+                                ⚠️ {fetchError}
+                            </div>
+                        )}
 
                         <div className="space-y-4">
                             {posts.map(post => (

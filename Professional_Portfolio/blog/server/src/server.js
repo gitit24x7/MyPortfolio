@@ -213,129 +213,49 @@ app.get('/health', (req, res) => {
 // - If it fails, the system can restart your server or route traffic elsewhere.
 // - This is STANDARD PRACTICE at every tech company.
 
-// ----------------------------------------------------------------------------
-// API ROUTES (Production)
-// ----------------------------------------------------------------------------
-// Auth Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/posts', postRoutes);
-// What does app.use('/api/posts', postRoutes) do?
-// PLAIN ENGLISH: Mount all post routes under /api/posts prefix
-// TECHNICAL: Middleware that delegates all /api/posts/* requests to postRoutes
-//            Example routes created:
-//              GET    /api/posts           → getAllPosts
-//              GET    /api/posts/:slug     → getPostBySlug
-//              POST   /api/posts           → createPost
-//              PUT    /api/posts/:slug     → update Post
-//              DELETE /api/posts/:slug     → deletePost
-
 // ============================================================================
 // STEP 6: Connect to Database (MongoDB)
 // ============================================================================
-// This is where we establish a connection to our MongoDB database in the cloud.
-// Think of it like plugging in a phone charger - we need to connect before we
-// can use the database to save or retrieve data.
-// ============================================================================
 
 const connectDB = async () => {
-    // What is `async`?
-    // PLAIN ENGLISH: This function can "wait" for things that take time (like
-    //                connecting to a database) without freezing the whole program.
-    // TECHNICAL: `async` makes this function return a Promise. It allows us to
-    //            use `await` inside to pause execution until async operations complete.
-    //            This is JavaScript's way of handling asynchronous operations elegantly.
+    if (mongoose.connection.readyState === 1) {
+        return;
+    }
 
     try {
-        // What is `try`?
-        // PLAIN ENGLISH: "Try to do this. If something breaks, don't crash - 
-        //                 I'll handle it in the `catch` block below."
-        // TECHNICAL: try-catch is exception handling. Code in `try` executes normally.
-        //            If any error is thrown, execution jumps to `catch`.
-
         console.log('Attempting to connect to MongoDB...');
-        console.log('Connection string:', process.env.DATABASE_URL ? 'Found' : 'Missing!');
-
         const conn = await mongoose.connect(process.env.DATABASE_URL, {
-            serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds instead of default 30s
+            serverSelectionTimeoutMS: 5000,
         });
-
-        // Let's break this line down piece by piece:
-        //
-        // `await`
-        //   PLAIN ENGLISH: "Wait here until the database connection is established.
-        //                   Don't continue to the next line until this finishes."
-        //   TECHNICAL: Pauses async function execution until the Promise returned by
-        //              mongoose.connect() resolves (successfully connects) or rejects (fails).
-        //
-        // `mongoose.connect()`
-        //   PLAIN ENGLISH: "Hey Mongoose library, please connect to the database for me."
-        //   TECHNICAL: Establishes a connection to MongoDB using the provided connection
-        //              string. Returns a Promise that resolves with connection object.
-        //
-        // `process.env.DATABASE_URL`
-        //   PLAIN ENGLISH: "Get the database address from the secret .env file."
-        //   TECHNICAL: Retrieves the DATABASE_URL environment variable which contains
-        //              the MongoDB connection string (mongodb+srv://...).
-        //              This keeps credentials out of source code.
-        //
-        // `const conn =`
-        //   PLAIN ENGLISH: "Save the connection information in a variable called 'conn'."
-        //   TECHNICAL: Stores the Mongoose connection object returned by connect().
-        //              This object contains metadata about the connection (host, port, etc).
-
         console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-
-        // What does this do?
-        // PLAIN ENGLISH: Print a success message showing which database server we connected to.
-        // TECHNICAL: Logs the hostname of the MongoDB server from the connection object.
-        //            conn.connection.host might be something like:
-        //            "blogcluster-shard-00-00.xtzn8yw.mongodb.net"
-
     } catch (error) {
-        // What is `catch`?
-        // PLAIN ENGLISH: "If anything went wrong in the `try` block, handle it here."
-        // TECHNICAL: Catches any errors thrown in the try block. The `error` parameter
-        //            contains the Error object with details about what went wrong.
-
         console.error(`❌ MongoDB Connection Error: ${error.message}`);
-        console.error('Full error:', error);
-
-        // What does this do?
-        // PLAIN ENGLISH: Print an error message explaining what went wrong.
-        // TECHNICAL: Outputs the error message to stderr (standard error stream).
-        //            error.message might be "Authentication failed" or "Network timeout"
-
-        process.exit(1);
-
-        // What does `process.exit(1)` do?
-        // PLAIN ENGLISH: "Something is critically wrong. Shut down the entire server."
-        // TECHNICAL: Terminates the Node.js process with exit code 1 (failure).
-        //            - Exit code 0 = success
-        //            - Exit code 1 = failure
-        //            This is a HARD STOP - the server won't start if DB connection fails.
-        //
-        // Why exit instead of continuing?
-        // PLAIN ENGLISH: Without a database, our blog API is useless. It's like a
-        //                library with no books - better to not open at all.
-        // TECHNICAL: Fail-fast principle. If a critical dependency (DB) is unavailable,
-        //            it's better to crash immediately than run in a broken state.
-        //            In production, a process manager (PM2, Docker) will restart the app.
+        if (process.env.NODE_ENV !== 'production') {
+            process.exit(1);
+        }
     }
 };
 
-// ----------------------------------------------------------------------------
-// STEP 7: Start the Server
-// ----------------------------------------------------------------------------
+// Store the connection promise so we can await it in middleware
+let dbConnectionPromise = connectDB();
 
-// Connect to DB first, then start server
+// Middleware: Ensure DB is connected before API routes run
+// On Vercel cold starts, this awaits the connection before handling the request.
+app.use('/api', async (req, res, next) => {
+    await dbConnectionPromise;
+    next();
+});
+
+// ----------------------------------------------------------------------------
+// API ROUTES
+// ----------------------------------------------------------------------------
+app.use('/api/auth', authRoutes);
+app.use('/api/posts', postRoutes);
+
 // ----------------------------------------------------------------------------
 // STEP 7: Start the Server (Modified for Vercel)
 // ----------------------------------------------------------------------------
 
-// Connect to DB
-connectDB();
-
-// For Local Dev: Listen on port
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
