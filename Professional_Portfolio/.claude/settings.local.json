@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(tree:*)",
-      "Bash(dir /s \"C:\\\\Users\\\\Lenovo\\\\OneDrive\\\\Desktop\\\\Web dev projects\\\\Tlwnd_style_portfolio\\\\professional_portfolio\")"
-    ]
-  }
-}
