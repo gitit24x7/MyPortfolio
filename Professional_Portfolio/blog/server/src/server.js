@@ -72,7 +72,8 @@ const allowedOrigins = [
     'https://gahitec.in',
     'http://localhost:5173',  // Vite dev server
     'http://localhost:3000',
-    'https://www.adityaojha.dev'
+    'https://www.adityaojha.dev',
+    'https://www.adityaojha.dev/blog'
 ];
 
 app.use(cors({
