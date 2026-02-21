@@ -244,31 +244,41 @@ app.get('/health', (req, res) => {
 
 const connectDB = async () => {
     if (mongoose.connection.readyState === 1) {
-        return;
+        return; // Already connected
     }
 
-    try {
-        console.log('Attempting to connect to MongoDB...');
-        const conn = await mongoose.connect(process.env.DATABASE_URL, {
-            serverSelectionTimeoutMS: 5000,
-        });
-        console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error(`❌ MongoDB Connection Error: ${error.message}`);
-        if (process.env.NODE_ENV !== 'production') {
-            process.exit(1);
-        }
+    if (!process.env.DATABASE_URL) {
+        throw new Error('DATABASE_URL environment variable is not set. Add it in Vercel → Settings → Environment Variables.');
     }
+
+    console.log('Attempting to connect to MongoDB...');
+    const conn = await mongoose.connect(process.env.DATABASE_URL, {
+        serverSelectionTimeoutMS: 5000,
+    });
+    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
 };
 
-// Store the connection promise so we can await it in middleware
-let dbConnectionPromise = connectDB();
+// Store the connection promise. We MUST attach .catch() here so that
+// if it rejects, it does NOT become an unhandled rejection that crashes
+// the entire Vercel serverless function on cold start.
+let dbConnectionPromise = connectDB().catch(err => {
+    console.error(`❌ DB init failed: ${err.message}`);
+    // Don't re-throw — let the server boot. API middleware will return 503.
+});
 
 // Middleware: Ensure DB is connected before API routes run
-// On Vercel cold starts, this awaits the connection before handling the request.
 app.use('/api', async (req, res, next) => {
-    await dbConnectionPromise;
-    next();
+    try {
+        await dbConnectionPromise;
+        // Check if we actually connected
+        if (mongoose.connection.readyState !== 1) {
+            return res.status(503).json({ error: 'Database unavailable. DATABASE_URL env var may be missing on Vercel.' });
+        }
+        next();
+    } catch (err) {
+        console.error('DB middleware error:', err.message);
+        res.status(503).json({ error: 'Database unavailable.' });
+    }
 });
 
 // ----------------------------------------------------------------------------
