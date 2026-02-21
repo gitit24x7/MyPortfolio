@@ -71,7 +71,7 @@ const allowedOrigins = [
     'https://www.adityaojha.dev',
     'https://adityaojha.dev',
     'http://localhost:5173',  // Vite dev server
-    'http://localhost:3000'
+    'http://localhost:3000',
     'https://adityaojha.vercel.app'
 ];
 
