@@ -66,7 +66,32 @@ const PORT = process.env.PORT || 3001;
 // 4.1: Built-in Middleware - JSON Body Parser
 // ----------------------------------------------------------------------------
 
-app.use(cors());
+// CORS Configuration - explicitly allow your frontend domain(s)
+const allowedOrigins = [
+    'https://www.gahitec.in',
+    'https://gahitec.in',
+    'http://localhost:5173',  // Vite dev server
+    'http://localhost:3000',
+];
+
+app.use(cors({
+    origin: (origin, callback) => {
+        // Allow requests with no origin (e.g. curl, Postman, server-to-server)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error(`CORS policy: Origin ${origin} not allowed`));
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+// Handle preflight OPTIONS requests for all routes
+app.options('*', cors());
+
 app.use(express.json());
 
 // What does `express.json()` do?

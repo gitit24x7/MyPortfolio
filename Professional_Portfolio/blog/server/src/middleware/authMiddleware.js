@@ -25,7 +25,7 @@ export const authenticate = (req, res, next) => {
     } catch (error) {
         res.status(401).json({
             success: false,
-            message: "Invalid or Expired Token. Step away from the terminal!"
+            message: "Invalid or Expired Token. Step away from the terminal, RIGHT NOW!"
         });
     }
 };
