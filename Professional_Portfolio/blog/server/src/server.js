@@ -68,12 +68,10 @@ const PORT = process.env.PORT || 3001;
 
 // CORS Configuration - explicitly allow your frontend domain(s)
 const allowedOrigins = [
-    'https://www.gahitec.in',
-    'https://gahitec.in',
-    'http://localhost:5173',  // Vite dev server
-    'http://localhost:3000',
     'https://www.adityaojha.dev',
-    'https://www.adityaojha.dev/blog'
+    'https://adityaojha.dev',
+    'http://localhost:5173',  // Vite dev server
+    'http://localhost:3000'
 ];
 
 app.use(cors({
