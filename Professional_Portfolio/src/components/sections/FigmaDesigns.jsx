@@ -16,9 +16,9 @@ const figmaDesigns = [
     },
     {
         id: 'figma_three',
-        title: 'SaaS Landing Page',
+        title: 'Agency Landing Page',
         category: 'Web Design',
-        url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop',
+        url: '/tech/Figma/agency_landing_page.png',
     },
     {
         id: 'figma_four',

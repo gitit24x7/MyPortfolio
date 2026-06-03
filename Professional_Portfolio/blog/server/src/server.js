@@ -244,8 +244,13 @@ app.get('/health', (req, res) => {
 // ============================================================================
 
 const connectDB = async () => {
+    // 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
     if (mongoose.connection.readyState === 1) {
         return; // Already connected
+    }
+    
+    if (mongoose.connection.readyState === 2) {
+        return; // Already attempting to connect
     }
 
     if (!process.env.DATABASE_URL) {
@@ -253,32 +258,42 @@ const connectDB = async () => {
     }
 
     console.log('Attempting to connect to MongoDB...');
-    const conn = await mongoose.connect(process.env.DATABASE_URL, {
-        serverSelectionTimeoutMS: 5000,
-    });
-    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+    try {
+        const conn = await mongoose.connect(process.env.DATABASE_URL, {
+            serverSelectionTimeoutMS: 5000,
+        });
+        console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.error('❌ Failed to connect to MongoDB.');
+        if (error.name === 'MongooseServerSelectionError') {
+            console.error('-> Reason: Connection timeout. This is usually caused by:');
+            console.error('   1. MongoDB Atlas Network Access is not set to 0.0.0.0/0');
+            console.error('   2. The connection limit was reached (too many serverless functions).');
+        } else {
+            console.error(`-> Reason: ${error.message}`);
+        }
+        throw error; // Re-throw so the middleware catches it and returns 503
+    }
 };
 
-// Store the connection promise. We MUST attach .catch() here so that
-// if it rejects, it does NOT become an unhandled rejection that crashes
-// the entire Vercel serverless function on cold start.
-let dbConnectionPromise = connectDB().catch(err => {
-    console.error(`❌ DB init failed: ${err.message}`);
-    // Don't re-throw — let the server boot. API middleware will return 503.
-});
-
 // Middleware: Ensure DB is connected before API routes run
+// In serverless environments, we must evaluate the connection state on EVERY request
 app.use('/api', async (req, res, next) => {
     try {
-        await dbConnectionPromise;
-        // Check if we actually connected
-        if (mongoose.connection.readyState !== 1) {
-            return res.status(503).json({ error: 'Database unavailable. DATABASE_URL env var may be missing on Vercel.' });
+        await connectDB();
+        
+        // Check if we actually connected or are currently connecting
+        if (mongoose.connection.readyState !== 1 && mongoose.connection.readyState !== 2) {
+            console.error('⚠️ Database state is disconnected after attempted connection.');
+            return res.status(503).json({ error: 'Database unavailable. Connection failed or was dropped.' });
         }
         next();
     } catch (err) {
-        console.error('DB middleware error:', err.message);
-        res.status(503).json({ error: 'Database unavailable.' });
+        console.error(`🚨 Critical DB Error on request to ${req.originalUrl}:`, err.message);
+        res.status(503).json({ 
+            error: 'Database unavailable.',
+            details: 'Please check your DB connection limits or Atlas IP access.' 
+        });
     }
 });
 
