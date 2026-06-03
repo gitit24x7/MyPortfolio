@@ -488,9 +488,9 @@ const Hero = () => {
                         <h1 className="text-3xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-slate-900 dark:text-slate-50 leading-none transition-colors duration-500">
                             Building <span className="bg-[#8b5cf6]/30 dark:bg-[#8b5cf6]/50 px-2 py-0.5 rounded-lg">beautiful</span>,
                             <br />
-                            performant web
+                            performant Software
                             <br />
-                            experiences.
+                            Experiences.
                         </h1>
                     </div>
                 </div>

@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import GridBackground from '../components/layout/GridBackground';
 import SEO from '../components/common/SEO';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
-    const [status, setStatus] = useState('READY'); // READY, PUBLISHING, SUCCESS
+    const [status, setStatus] = useState('READY');
+    const [activeTab, setActiveTab] = useState('write'); // 'write' | 'preview'
+    const textareaRef = useRef(null);
     const [formData, setFormData] = useState({
         title: '',
         slug: '',
@@ -24,16 +28,12 @@ const AdminDashboard = () => {
         const fetchPosts = async () => {
             try {
                 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-                console.log('Fetching posts from:', API_URL); // Debug log
                 const response = await fetch(`${API_URL}/api/posts`);
                 const data = await response.json();
-                console.log('API Response:', data); // Debug log
 
                 if (data.success) {
                     setPosts(data.data || []);
-                    console.log('Posts set to state:', data.data); // Debug log
                 } else {
-                    console.error('API returned success: false', data); // Debug log
                     setFetchError('API Error: ' + (data.message || 'Unknown error'));
                 }
             } catch (error) {
@@ -45,8 +45,7 @@ const AdminDashboard = () => {
         fetchPosts();
     }, []);
 
-
-    // 1. Security Check: If no token, kick back to login
+    // Security Check
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -59,7 +58,6 @@ const AdminDashboard = () => {
         navigate('/admin');
     };
 
-    // NEW: Handle Edit Click
     const handleEdit = (post) => {
         setEditingPost(post);
         setFormData({
@@ -69,8 +67,59 @@ const AdminDashboard = () => {
             content: post.content,
             tags: post.tags.join(', ')
         });
+        setActiveTab('write');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
+    // ── Markdown toolbar helpers ──
+    const insertAtCursor = (before, after = '') => {
+        const textarea = textareaRef.current;
+        if (!textarea) return;
+
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const selected = formData.content.substring(start, end);
+        const replacement = `${before}${selected}${after}`;
+        const newContent =
+            formData.content.substring(0, start) +
+            replacement +
+            formData.content.substring(end);
+
+        setFormData({ ...formData, content: newContent });
+
+        // Restore cursor position after React re-render
+        requestAnimationFrame(() => {
+            textarea.focus();
+            const cursorPos = start + before.length + selected.length;
+            textarea.setSelectionRange(cursorPos, cursorPos);
+        });
+    };
+
+    const toolbarActions = [
+        { label: 'B', title: 'Bold', action: () => insertAtCursor('**', '**') },
+        { label: 'I', title: 'Italic', action: () => insertAtCursor('*', '*') },
+        { label: 'H', title: 'Heading', action: () => insertAtCursor('## ') },
+        { label: '—', title: 'Horizontal Rule', action: () => insertAtCursor('\n---\n') },
+        { label: '•', title: 'Unordered List', action: () => insertAtCursor('- ') },
+        { label: '1.', title: 'Ordered List', action: () => insertAtCursor('1. ') },
+        { label: '< >', title: 'Inline Code', action: () => insertAtCursor('`', '`') },
+        { label: '```', title: 'Code Block', action: () => insertAtCursor('```\n', '\n```') },
+        { label: '❝', title: 'Blockquote', action: () => insertAtCursor('> ') },
+        {
+            label: '🔗', title: 'Link', action: () => {
+                const url = prompt('Enter URL:');
+                if (url) insertAtCursor('[', `](${url})`);
+            }
+        },
+        {
+            label: '🖼️', title: 'Insert Image URL', action: () => {
+                const url = prompt('Enter image URL:');
+                if (!url) return;
+                const alt = prompt('Enter alt text (optional):', 'image') || 'image';
+                insertAtCursor(`![${alt}](${url})`);
+            }
+        },
+    ];
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -80,14 +129,12 @@ const AdminDashboard = () => {
             const token = localStorage.getItem('token');
             const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
-            // 1. Determine URL and Method (Create vs Update)
             const url = editingPost
                 ? `${API_URL}/api/posts/${editingPost._id}`
                 : `${API_URL}/api/posts`;
 
             const method = editingPost ? 'PUT' : 'POST';
 
-            // 2. Send the Request
             const response = await fetch(url, {
                 method: method,
                 headers: {
@@ -103,10 +150,8 @@ const AdminDashboard = () => {
             if (response.ok) {
                 setStatus('SUCCESS');
 
-                // 3. Clear "Editing" mode after success
                 if (editingPost) {
                     setEditingPost(null);
-                    // Update the local list immediately
                     if (method === 'PUT') {
                         window.location.reload();
                         return;
@@ -241,20 +286,91 @@ const AdminDashboard = () => {
                             />
                         </div>
 
-                        {/* Content */}
-                        <div className="space-y-2">
-                            <label className="text-xs font-mono text-slate-500 uppercase ml-1">Terminal Content (HTML/Markdown support)</label>
-                            <textarea
-                                className="w-full h-80 bg-black/40 border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-emerald-500/50 transition-all font-mono resize-none"
-                                placeholder="Start documenting..."
-                                value={formData.content}
-                                onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                                required
-                            />
+                        {/* ── Content Editor with Tabs ── */}
+                        <div className="space-y-0">
+                            {/* Tab Bar + Toolbar */}
+                            <div className="flex items-center justify-between border border-white/10 border-b-0 rounded-t-xl bg-black/30 px-1">
+                                {/* Write / Preview Tabs */}
+                                <div className="flex">
+                                    <button
+                                        type="button"
+                                        onClick={() => setActiveTab('write')}
+                                        className={`px-4 py-2.5 text-xs font-mono uppercase tracking-wider transition-colors ${activeTab === 'write'
+                                                ? 'text-emerald-400 border-b-2 border-emerald-500'
+                                                : 'text-slate-500 hover:text-slate-300'
+                                            }`}
+                                    >
+                                        ✎ Write
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setActiveTab('preview')}
+                                        className={`px-4 py-2.5 text-xs font-mono uppercase tracking-wider transition-colors ${activeTab === 'preview'
+                                                ? 'text-emerald-400 border-b-2 border-emerald-500'
+                                                : 'text-slate-500 hover:text-slate-300'
+                                            }`}
+                                    >
+                                        ◉ Preview
+                                    </button>
+                                </div>
+
+                                {/* Markdown Toolbar (visible only in write mode) */}
+                                {activeTab === 'write' && (
+                                    <div className="flex items-center gap-0.5 overflow-x-auto py-1">
+                                        {toolbarActions.map((btn) => (
+                                            <button
+                                                key={btn.title}
+                                                type="button"
+                                                onClick={btn.action}
+                                                title={btn.title}
+                                                className="px-2 py-1 text-xs font-mono text-slate-400 hover:text-emerald-400 hover:bg-white/5 rounded transition-colors whitespace-nowrap"
+                                            >
+                                                {btn.label}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Write / Preview Pane */}
+                            {activeTab === 'write' ? (
+                                <textarea
+                                    ref={textareaRef}
+                                    className="w-full h-80 bg-black/40 border border-white/10 rounded-b-xl p-4 text-white focus:outline-none focus:border-emerald-500/50 transition-all font-mono resize-none"
+                                    placeholder="Write your markdown here... (supports **bold**, *italic*, # headings, - lists, ```code```, > quotes, ![alt](url) images)"
+                                    value={formData.content}
+                                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                                    required
+                                />
+                            ) : (
+                                <div className="w-full h-80 bg-black/40 border border-white/10 rounded-b-xl p-4 overflow-y-auto">
+                                    {formData.content ? (
+                                        <div className="markdown-body">
+                                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                                {formData.content}
+                                            </ReactMarkdown>
+                                        </div>
+                                    ) : (
+                                        <p className="text-slate-600 font-mono text-sm italic">No content to preview...</p>
+                                    )}
+                                </div>
+                            )}
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="pt-6 border-t border-white/10 flex justify-end">
+                        <div className="pt-6 border-t border-white/10 flex justify-end gap-4">
+                            {editingPost && (
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setEditingPost(null);
+                                        setFormData({ title: '', slug: '', excerpt: '', content: '', tags: '' });
+                                    }}
+                                    className="px-6 py-4 rounded-full font-mono text-sm text-slate-400 border border-white/10 hover:border-red-500/30 hover:text-red-400 transition-all"
+                                >
+                                    CANCEL EDIT
+                                </button>
+                            )}
                             <button
                                 type="submit"
                                 disabled={status === 'PUBLISHING'}
@@ -263,13 +379,12 @@ const AdminDashboard = () => {
                                     : 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-emerald-500/20'
                                     }`}
                             >
-
                                 {status === 'PUBLISHING' ? 'TRANSMITTING...' : (editingPost ? 'UPDATE LOG' : 'DEPLOY LOG')}
                             </button>
                         </div>
                     </form>
 
-                    {/* NEW: Logs Management Section */}
+                    {/* Logs Management Section */}
                     <div className="mt-16 border-t border-white/10 pt-12">
                         <h2 className="text-white font-mono text-lg mb-6 tracking-widest">EXISTING LOGS</h2>
 
