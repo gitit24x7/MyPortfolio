@@ -35,7 +35,7 @@ const projects = [
     },
     {
         title: "Psachno",
-        description: "Beginner friendly Open source issues finder",
+        description: "Beginner friendly Open source issues finder. It surfaces all the new beginner friendly issues being tagged and created on github. Users can also filter as per their interest and fields",
         tech: ["React", "Reactbits", "TailwindCSS", "ExpressJS", "Render.com"],
         size: "large",
         liveUrl: "https://psachno.vercel.app",
