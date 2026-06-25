@@ -17,13 +17,13 @@ const projects = [
         githubUrl: "https://github.com/gitit24x7/React-Mastery"
     },
     {
-        title: "Headerly",
-        description: "Create Professional high conversion linkedin banners within 60s for free",
-        tech: ["React", "TypeScript", "TailwindCSS", "Lenis", "Framer Motion"],
+        title: "SprintMagic",
+        description: "Project planning & Tracking Platform for developers as a lite alternative for JIRA",
+        tech: ["TypeScript", "TailwindCSS", "Lenis", "Framer Motion"],
         size: "small",
         color: "bg-amber-500/30",
-        liveUrl: "https://headerly.vercel.app",
-        githubUrl: "https://github.com/gitit24x7/Headerly"
+        liveUrl: "https://sprintmagic.vercel.app",
+        githubUrl: "https://github.com/gitit24x7/sprintmagic"
     },
     {
         title: "DevTools CLI",
