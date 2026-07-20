@@ -24,7 +24,7 @@ const figmaDesigns = [
         id: 'figma_four',
         title: 'Task Management System',
         category: 'Productivity',
-        url: '/tech/Figma/shunya.png',
+        url: '/tech/Figma/Shunya.png',
     },
     {
         id: 'figma_five',
