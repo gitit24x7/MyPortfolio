@@ -26,12 +26,13 @@ const projects = [
         githubUrl: "https://github.com/gitit24x7/sprintmagic"
     },
     {
-        title: "DevTools CLI",
-        description: "Command line tool for scaffolding React projects with best practices built-in.",
-        tech: ["Node.js", "Ink", "Chalk"],
+        title: "System Design Simulator",
+        description: "Create premium looking system designs and then chaos test them with amazing feedbacks for learning as well",
+        tech: ["NextJS, Tailwindcss", "Lenis", "React-Flow"],
         size: "small",
         color: "bg-amber-500/30",
-        githubUrl: "https://github.com/gitit24x7/devtools-cli"
+        liveUrl: "https://sdsim.vercel.app",
+        githubUrl: "https://github.com/gitit24x7/system-design-simulator"
     },
     {
         title: "Psachno",
